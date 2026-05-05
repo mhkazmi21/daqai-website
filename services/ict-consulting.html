@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ICT Consulting — DAQAI</title>
+<meta name="description" content="DAQAI ICT Consulting — digital transformation strategy, IT infrastructure design, cloud advisory, network optimisation, and technology roadmap development for Defence, Government, and Healthcare in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* Consulting-specific styles */
+  .consult-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .consult-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .consult-card:hover {
+    border-color: rgba(37,99,176,.3);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .consult-icon-wrap {
+    width: 56px; height: 56px;
+    background: var(--bluelt);
+    border: 1px solid rgba(37,99,176,.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .consult-card h3 { font-size: 17px; color: var(--navy); margin-bottom: 10px; }
+  .consult-card p  { font-size: 13px; color: var(--slate2); line-height: 1.85; }
+  .consult-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .consult-tag {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 9px;
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--slate2);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 48px;
+    box-shadow: var(--shadow);
+  }
+  .approach-item {
+    padding: 36px 32px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    transition: background .2s;
+  }
+  .approach-item:hover { background: var(--off); }
+  .approach-item:nth-child(even) { border-right: none; }
+  .approach-item:nth-child(3),
+  .approach-item:nth-child(4) { border-bottom: none; }
+  .approach-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .approach-item h4 { font-size: 16px; color: var(--navy); margin-bottom: 10px; }
+  .approach-item p  { font-size: 13px; color: var(--slate2); line-height: 1.8; }
+
+  .expertise-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .expertise-item {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .expertise-item .icon { font-size: 28px; margin-bottom: 12px; }
+  .expertise-item h4 { font-size: 14px; color: var(--white); margin-bottom: 8px; }
+  .expertise-item p  { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.7; }
+
+  .quote-block {
+    background: linear-gradient(135deg, var(--navy), var(--slate));
+    border-radius: 12px;
+    padding: 48px 52px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    color: rgba(255,255,255,.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    line-height: 1.6;
+    font-style: italic;
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-block cite {
+    display: block;
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,.45);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 900px) {
+    .consult-grid     { grid-template-columns: 1fr; }
+    .consult-card     { grid-template-columns: 1fr; }
+    .approach-grid    { grid-template-columns: 1fr; }
+    .approach-item    { border-right: none !important; }
+    .approach-item:nth-child(3) { border-bottom: 1px solid var(--border) !important; }
+    .expertise-strip  { grid-template-columns: 1fr 1fr; }
+    .quote-block      { padding: 32px 28px; }
+    .quote-block p    { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">ICT Consulting</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">💡</div>
+    <h1 style="color:var(--white);max-width:760px;margin-bottom:20px;">ICT Consulting</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:640px;line-height:1.85;">
+      Strategic technology guidance that cuts through complexity — aligning your IT ecosystem
+      to your mission, modernising what needs modernising, and building a clear roadmap for
+      where you need to go next.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Talk to a Consultant</div>
+      <a class="btn btn-white" href="../index.html#contact">Contact Us</a>
+    </div>
+    <!-- Proof points -->
+    <div style="display:flex;gap:20px;margin-top:40px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Vendor-neutral advice</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Sector-specific expertise</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Actionable recommendations</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Implementation support available</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONSULTING SERVICES -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Our Consulting Practice</div>
+      <h2>What We Advise On</h2>
+      <p class="lead">Expert guidance across every dimension of your technology environment — strategic, architectural, and operational.</p>
+    </div>
+    <div class="consult-grid">
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">🗺️</div>
+        <div>
+          <h3>Digital Transformation Strategy</h3>
+          <p>Develop a clear, phased roadmap for modernising your IT environment — aligned to your organisation's goals, budget, risk appetite, and regulatory requirements. We help you make confident decisions about where to invest and in what order.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">Roadmapping</span>
+            <span class="consult-tag">Business Case</span>
+            <span class="consult-tag">Change Management</span>
+            <span class="consult-tag">Stakeholder Alignment</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">🏗️</div>
+        <div>
+          <h3>IT Infrastructure Assessment &amp; Design</h3>
+          <p>Comprehensive review of your current infrastructure with gap analysis, risk identification, and a future-state architecture designed for performance, security, and scalability — built to last, not just to pass the next audit.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">Gap Analysis</span>
+            <span class="consult-tag">Architecture Design</span>
+            <span class="consult-tag">Capacity Planning</span>
+            <span class="consult-tag">Resilience Planning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">☁️</div>
+        <div>
+          <h3>Cloud Computing Advisory</h3>
+          <p>Evaluate public, private, and hybrid cloud options through the lens of your workloads, compliance requirements, data sovereignty obligations, and total cost of ownership — then design the right model for your organisation.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">Cloud Strategy</span>
+            <span class="consult-tag">Migration Planning</span>
+            <span class="consult-tag">Hybrid Cloud</span>
+            <span class="consult-tag">Cost Optimisation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">📶</div>
+        <div>
+          <h3>Network Optimisation</h3>
+          <p>Assess and redesign your network architecture for improved performance, resilience, and security — including SD-WAN, LAN/WAN topology, wireless environments, and network segmentation for critical systems.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">Network Design</span>
+            <span class="consult-tag">SD-WAN</span>
+            <span class="consult-tag">Segmentation</span>
+            <span class="consult-tag">Performance Tuning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">📅</div>
+        <div>
+          <h3>Technology Roadmap Development</h3>
+          <p>Structured, multi-year technology planning that ensures your IT investments are properly prioritised, sequenced, and tied to organisational milestones — with clear budget forecasting and governance checkpoints.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">Multi-Year Planning</span>
+            <span class="consult-tag">Budget Forecasting</span>
+            <span class="consult-tag">Governance</span>
+            <span class="consult-tag">KPI Framework</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="consult-card">
+        <div class="consult-icon-wrap">⚖️</div>
+        <div>
+          <h3>Vendor Selection &amp; Procurement Advisory</h3>
+          <p>Objective, vendor-neutral guidance on technology selection — evaluating options on capability, total cost, support quality, and strategic fit. We help you write RFPs, evaluate proposals, and negotiate contracts without bias.</p>
+          <div class="consult-tags">
+            <span class="consult-tag">RFP Development</span>
+            <span class="consult-tag">Vendor Evaluation</span>
+            <span class="consult-tag">Contract Review</span>
+            <span class="consult-tag">Due Diligence</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE BLOCK -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="quote-block">
+      <p>Good technology strategy is not about adopting what's new. It's about identifying what's right — for your mission, your constraints, and your people.</p>
+      <cite>— DAQAI ICT Consulting Practice</cite>
+    </div>
+  </div>
+</div>
+
+<!-- OUR APPROACH -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">How We Work</div>
+      <h2>Our Consulting Approach</h2>
+      <p class="lead">Rigorous, structured, and always grounded in your specific context — not generic best practice templates.</p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-item">
+        <div class="approach-num">01</div>
+        <h4>Discover &amp; Understand</h4>
+        <p>We start by deeply understanding your organisation — your mission, your constraints, your current technology landscape, and the pressures your leadership team is facing. We never skip this step.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">02</div>
+        <h4>Analyse &amp; Diagnose</h4>
+        <p>Rigorous technical and organisational assessment — identifying gaps, risks, inefficiencies, and hidden opportunities across your IT environment, processes, and governance structures.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">03</div>
+        <h4>Recommend &amp; Prioritise</h4>
+        <p>Clear, actionable recommendations presented with business cases, risk assessments, and implementation sequencing — so decision-makers can act with confidence, not just read a report.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">04</div>
+        <h4>Support &amp; Deliver</h4>
+        <p>Optional implementation support — we can stay engaged to oversee delivery, manage vendors, track milestones, and course-correct as your programme evolves. Strategy without execution is just theory.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERTISE AREAS -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Domain Expertise</div>
+      <h2>Where Our Consultants Specialise</h2>
+    </div>
+    <div class="expertise-strip">
+      <div class="expertise-item">
+        <div class="icon">🛡️</div>
+        <h4>Security Architecture</h4>
+        <p>Zero Trust, network segmentation, and security-by-design for critical environments</p>
+      </div>
+      <div class="expertise-item">
+        <div class="icon">☁️</div>
+        <h4>Cloud &amp; Hybrid Infrastructure</h4>
+        <p>Private cloud, Azure, AWS — migration strategy and hybrid architecture design</p>
+      </div>
+      <div class="expertise-item">
+        <div class="icon">🏥</div>
+        <h4>Healthcare IT</h4>
+        <p>EHR systems, HIPAA compliance, telemedicine infrastructure, and clinical workflow technology</p>
+      </div>
+      <div class="expertise-item">
+        <div class="icon">🏛️</div>
+        <h4>Government &amp; Public Sector</h4>
+        <p>E-government strategy, legacy modernisation, data sovereignty, and GRC frameworks</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Who We Advise</div>
+      <h2>Sector Experience</h2>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-icon">🎖️</div>
+        <h3>Defence &amp; National Security</h3>
+        <p>Technology strategy and architecture for defence organisations — balancing operational capability, security classification requirements, and procurement compliance.</p>
+        <div class="sector-tags"><span class="stag">Secure Architecture</span><span class="stag">Classified Systems</span><span class="stag">Procurement Advisory</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏛️</div>
+        <h3>Government &amp; Public Sector</h3>
+        <p>Digital transformation strategy for federal and provincial agencies — modernising legacy systems, improving citizen services, and building IT governance frameworks.</p>
+        <div class="sector-tags"><span class="stag">Digital Pakistan</span><span class="stag">Legacy Modernisation</span><span class="stag">IT Governance</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏥</div>
+        <h3>Healthcare</h3>
+        <p>Healthcare IT strategy covering EHR adoption, telemedicine platforms, clinical network design, and HIPAA compliance roadmaps — aligned to both clinical and administrative needs.</p>
+        <div class="sector-tags"><span class="stag">EHR Strategy</span><span class="stag">Clinical IT</span><span class="stag">HIPAA Roadmap</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏢</div>
+        <h3>Enterprise &amp; Commercial</h3>
+        <p>IT strategy and transformation advisory for private sector organisations — cloud migration, ERP selection, infrastructure consolidation, and technology cost optimisation.</p>
+        <div class="sector-tags"><span class="stag">Cloud Migration</span><span class="stag">ERP Advisory</span><span class="stag">IT Consolidation</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Start with Clarity</div>
+    <h2>Start with the right strategy.</h2>
+    <p>Schedule a consultation with our ICT advisory team and get clarity on your technology priorities — without the jargon, without the vendor bias, and without the delay.</p>
+    <div class="btn btn-blue" onclick="openModal()">Talk to a Consultant</div>
+  </div>
+
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="managed-it.html"><div class="other-svc-icon">🖥️</div><p>Managed IT</p></a>
+      <a class="other-svc" href="hardware-software.html"><div class="other-svc-icon">⚙️</div><p>Hardware &amp; Software</p></a>
+      <a class="other-svc" href="resource-outsourcing.html"><div class="other-svc-icon">👥</div><p>Resource Outsourcing</p></a>
+      <a class="other-svc" href="software-development.html"><div class="other-svc-icon">🔧</div><p>Software Development</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Get In Touch</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Talk to a Consultant</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Tell us about your challenge and we'll schedule a consultation within 24 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Consulting Area</label>
+          <select class="form-input">
+            <option value="">Select area…</option>
+            <option>Digital Transformation Strategy</option>
+            <option>IT Infrastructure Assessment</option>
+            <option selected>ICT Consulting (General)</option>
+            <option>Cloud Advisory</option>
+            <option>Network Optimisation</option>
+            <option>Technology Roadmap</option>
+            <option>Vendor Selection</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Describe your challenge</label><textarea rows="3" placeholder="What technology challenge are you trying to solve?" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">We'll respond within <strong>24 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your request has been sent. A consultant will be in touch within <strong>24 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
