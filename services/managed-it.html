@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Managed IT Services — DAQAI</title>
+<meta name="description" content="DAQAI Managed IT Services — 24/7 monitoring, server and network management, data backup, patch management, and IT helpdesk support for Defence, Government, and Healthcare organisations in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  .sla-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .sla-card {
+    border-radius: 10px;
+    padding: 36px 28px;
+    border: 2px solid var(--border);
+    position: relative;
+    transition: all .25s;
+  }
+  .sla-card.featured {
+    border-color: var(--blue);
+    background: var(--bluelt);
+  }
+  .sla-card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+  .sla-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .sla-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+  .sla-card h3 { font-size: 22px; color: var(--navy); margin-bottom: 16px; }
+  .sla-features { list-style: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sla-features li {
+    font-size: 13px;
+    color: var(--slate2);
+    padding: 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .sla-features li::before { content: '✓'; color: var(--blue); font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .sla-features li.no::before { content: '–'; color: var(--slate3); }
+  .sla-features li.no { color: var(--slate3); }
+
+  .uptime-bar {
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .uptime-stat { text-align: center; flex: 1; min-width: 120px; }
+  .uptime-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .uptime-label { font-size: 12px; color: var(--slate2); margin-top: 4px; }
+  .uptime-divider { width: 1px; height: 60px; background: var(--border); flex-shrink: 0; }
+
+  @media (max-width: 900px) {
+    .sla-grid { grid-template-columns: 1fr; }
+    .uptime-bar { flex-direction: column; gap: 24px; }
+    .uptime-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">Managed IT Services</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">🖥️</div>
+    <h1 style="color:var(--white);max-width:700px;margin-bottom:20px;">Managed IT Services</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:620px;line-height:1.85;">
+      Proactive 24/7 monitoring and management that keeps your infrastructure running at peak
+      performance — so your team can focus on what matters, not on keeping the lights on.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Get a Managed IT Quote</div>
+      <a class="btn btn-white" href="../index.html#contact">Contact Us</a>
+    </div>
+    <!-- Uptime promise -->
+    <div style="display:inline-flex;align-items:center;gap:10px;margin-top:36px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:10px 18px;">
+      <span style="color:#2ecc71;font-size:18px;">●</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:1px;">
+        99.9% uptime SLA · 24/7 monitoring · &lt;1hr critical response time
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="background:var(--navy2);padding:36px 48px;">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:0;padding:28px 24px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--blue);">24/7</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">Monitoring</div>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:28px 24px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--blue);">99.9%</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">Uptime SLA</div>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:28px 24px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--blue);">&lt;1hr</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">Critical Response</div>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:28px 24px;text-align:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--blue);">ISO</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;">27001 Aligned</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">What We Manage</div>
+      <h2>Managed IT Services</h2>
+      <p class="lead">End-to-end IT management so you never have to worry about uptime, patches, or performance again.</p>
+    </div>
+    <div class="svc-feature-grid">
+      <div class="svc-feature">
+        <div class="svc-feature-icon">📡</div>
+        <h4>24/7 System Monitoring &amp; Support</h4>
+        <p>Round-the-clock monitoring of servers, networks, and endpoints with real-time alerting and proactive incident response — before issues become outages. Our NOC never sleeps.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">🖧</div>
+        <h4>Server &amp; Network Management</h4>
+        <p>Full lifecycle management of your server infrastructure and network equipment — configuration, performance tuning, capacity planning, and vendor coordination, all handled for you.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">💾</div>
+        <h4>Data Backup &amp; Recovery</h4>
+        <p>Automated, encrypted backup solutions with tested recovery procedures. We define and meet your RTO and RPO requirements — ensuring your data is always recoverable when it matters most.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">🔐</div>
+        <h4>Security Management &amp; Compliance</h4>
+        <p>Ongoing security configuration management, vulnerability patching, and compliance reporting — aligned to ISO 27001, HIPAA, and sector-specific regulatory requirements.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">🔄</div>
+        <h4>Patch Management</h4>
+        <p>Structured, tested patch deployment cycles that keep your systems current and protected — scheduled outside business hours to avoid disrupting your operations.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">📞</div>
+        <h4>IT Helpdesk Support</h4>
+        <p>Dedicated helpdesk for your staff with tiered support levels — resolving day-to-day IT issues quickly so your people stay productive and your internal IT team isn't overwhelmed.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">☁️</div>
+        <h4>Cloud Infrastructure Management</h4>
+        <p>Management of your cloud environments across Azure, AWS, or private cloud — including cost optimisation, performance monitoring, access control, and resource scaling.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">📊</div>
+        <h4>Reporting &amp; Dashboards</h4>
+        <p>Monthly executive reports and real-time dashboards giving you full visibility into your IT health, uptime statistics, incident trends, and patch compliance status.</p>
+      </div>
+      <div class="svc-feature">
+        <div class="svc-feature-icon">🏗️</div>
+        <h4>IT Asset Management</h4>
+        <p>Full inventory and lifecycle management of your hardware and software assets — covering procurement, deployment, warranty tracking, and end-of-life planning.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE TIERS -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Service Tiers</div>
+      <h2>Choose Your Coverage Level</h2>
+      <p class="lead" style="margin:16px auto 0;">Flexible managed service packages designed to match your organisation's size, complexity, and budget.</p>
+    </div>
+    <div class="sla-grid">
+
+      <!-- ESSENTIAL -->
+      <div class="sla-card">
+        <div class="sla-tier">Essential</div>
+        <h3>IT Foundation</h3>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.7;">Core monitoring and support for small to mid-size organisations that need reliable IT management without a full internal team.</p>
+        <ul class="sla-features">
+          <li>Business hours monitoring (8am–6pm)</li>
+          <li>Server &amp; network management</li>
+          <li>Monthly patch management</li>
+          <li>Data backup management</li>
+          <li>Helpdesk support (business hours)</li>
+          <li>Monthly health report</li>
+          <li class="no">24/7 after-hours monitoring</li>
+          <li class="no">Security compliance reporting</li>
+          <li class="no">Dedicated account manager</li>
+        </ul>
+        <div class="btn btn-outline btn-sm" style="margin-top:24px;width:100%;justify-content:center;" onclick="openModal()">Get a Quote</div>
+      </div>
+
+      <!-- PROFESSIONAL -->
+      <div class="sla-card featured">
+        <div class="sla-tier">Professional</div>
+        <h3>IT Operations</h3>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.7;">Comprehensive managed IT for growing organisations that need 24/7 coverage, security compliance, and proactive infrastructure management.</p>
+        <ul class="sla-features">
+          <li>24/7 monitoring &amp; alerting</li>
+          <li>Server, network &amp; cloud management</li>
+          <li>Weekly patch management</li>
+          <li>Automated backup &amp; tested recovery</li>
+          <li>Helpdesk support (24/7)</li>
+          <li>Security management &amp; compliance</li>
+          <li>Monthly executive reporting</li>
+          <li>Dedicated account manager</li>
+          <li class="no">On-site engineering visits</li>
+        </ul>
+        <div class="btn btn-blue btn-sm" style="margin-top:24px;width:100%;justify-content:center;" onclick="openModal()">Get a Quote</div>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="sla-card">
+        <div class="sla-tier">Enterprise</div>
+        <h3>IT Command</h3>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.7;">Full-spectrum managed IT for large organisations and critical environments requiring maximum SLAs, on-site support, and strategic IT leadership.</p>
+        <ul class="sla-features">
+          <li>24/7 monitoring — &lt;15 min alert response</li>
+          <li>Full infrastructure management</li>
+          <li>Continuous patch management</li>
+          <li>Real-time backup &amp; DR testing</li>
+          <li>Dedicated helpdesk team</li>
+          <li>ISO 27001 / HIPAA compliance mgmt</li>
+          <li>Weekly &amp; monthly executive reporting</li>
+          <li>Dedicated account manager</li>
+          <li>On-site engineering visits (monthly)</li>
+        </ul>
+        <div class="btn btn-outline btn-sm" style="margin-top:24px;width:100%;justify-content:center;" onclick="openModal()">Get a Quote</div>
+      </div>
+
+    </div>
+
+    <!-- UPTIME STATS -->
+    <div class="uptime-bar">
+      <div class="uptime-stat">
+        <div class="uptime-num">99.9%</div>
+        <div class="uptime-label">Target Uptime SLA</div>
+      </div>
+      <div class="uptime-divider"></div>
+      <div class="uptime-stat">
+        <div class="uptime-num">&lt;1hr</div>
+        <div class="uptime-label">Critical Incident Response</div>
+      </div>
+      <div class="uptime-divider"></div>
+      <div class="uptime-stat">
+        <div class="uptime-num">24/7</div>
+        <div class="uptime-label">NOC Operations</div>
+      </div>
+      <div class="uptime-divider"></div>
+      <div class="uptime-stat">
+        <div class="uptime-num">365</div>
+        <div class="uptime-label">Days Per Year Coverage</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW WE WORK -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Our Onboarding Process</div>
+      <h2>Up &amp; Running in 4 Steps</h2>
+      <p class="lead">A structured onboarding process that gets you fully covered with minimal disruption.</p>
+    </div>
+    <div class="svc-process">
+      <div class="svc-step">
+        <div class="svc-step-num">01</div>
+        <h4>Discovery</h4>
+        <p>Full audit of your existing IT environment — infrastructure, assets, vendors, and current pain points.</p>
+      </div>
+      <div class="svc-step">
+        <div class="svc-step-num">02</div>
+        <h4>Stabilise</h4>
+        <p>Resolve immediate issues, install monitoring agents, close security gaps, and document your environment.</p>
+      </div>
+      <div class="svc-step">
+        <div class="svc-step-num">03</div>
+        <h4>Manage</h4>
+        <p>Full managed service goes live — proactive monitoring, patching, and helpdesk under agreed SLAs.</p>
+      </div>
+      <div class="svc-step">
+        <div class="svc-step-num">04</div>
+        <h4>Optimise</h4>
+        <p>Regular reviews, performance tuning, and strategic planning to continuously improve your IT posture.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY MANAGED IT -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header split">
+      <div>
+        <div class="eyebrow">The Business Case</div>
+        <h2>Why Outsource Your IT Management?</h2>
+      </div>
+      <p class="lead" style="margin-top:0;max-width:380px;">Running IT in-house costs more than most organisations realise — in salaries, tools, training, and downtime.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h3>Predictable Costs</h3>
+        <p>Replace unpredictable IT costs with a fixed monthly fee. No surprise infrastructure failures, no emergency contractor call-out fees, no unplanned hardware spend.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧠</div>
+        <h3>Access Senior Expertise</h3>
+        <p>Get a full team of experienced engineers, security specialists, and architects — for far less than hiring even one senior IT professional in-house.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Faster Incident Response</h3>
+        <p>Our NOC detects and responds to incidents before your staff even notice. Proactive monitoring means most issues are resolved before they cause any disruption.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h3>Focus on Your Mission</h3>
+        <p>Stop your leadership team from firefighting IT problems. When IT just works, your people can focus entirely on delivering your organisation's core mission.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <h3>Built-in Compliance</h3>
+        <p>Our managed services are designed around ISO 27001, HIPAA, and NIST frameworks — keeping you compliant without the overhead of managing it yourself.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <h3>Scales With You</h3>
+        <p>Whether you're growing your headcount, opening new offices, or migrating to cloud — your managed IT service scales with you without re-tendering or disruption.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Let Us Handle It</div>
+    <h2>Let us manage your IT — so you don't have to.</h2>
+    <p>Talk to our team about a managed services package tailored to your organisation's size, sector, and needs. We'll put together a proposal within 48 hours.</p>
+    <div class="btn btn-blue" onclick="openModal()">Get a Managed IT Quote</div>
+  </div>
+
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="ict-consulting.html"><div class="other-svc-icon">💡</div><p>ICT Consulting</p></a>
+      <a class="other-svc" href="hardware-software.html"><div class="other-svc-icon">⚙️</div><p>Hardware &amp; Software</p></a>
+      <a class="other-svc" href="resource-outsourcing.html"><div class="other-svc-icon">👥</div><p>Resource Outsourcing</p></a>
+      <a class="other-svc" href="software-development.html"><div class="other-svc-icon">🔧</div><p>Software Development</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Get In Touch</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Request a Managed IT Quote</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Tell us about your environment and we'll put together a tailored proposal within 48 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Service Tier Interest</label>
+          <select class="form-input">
+            <option value="">Select a tier…</option>
+            <option>Essential — IT Foundation</option>
+            <option selected>Professional — IT Operations</option>
+            <option>Enterprise — IT Command</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Tell us about your environment</label><textarea rows="3" placeholder="Number of users, servers, locations, current pain points…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">Proposal within <strong>48 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your request has been sent. We'll have a tailored proposal to you within <strong>48 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
