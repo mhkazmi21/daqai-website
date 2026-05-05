@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Specialised Intelligence Solutions — DAQAI</title>
+<meta name="description" content="DAQAI specialised intelligence solutions — communication interception, jamming systems, anti-drone, ELINT, C4ISR, OSINT, and communication security for Defence and Law Enforcement."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* ── Page-specific overrides ── */
+  .intel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .intel-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .intel-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--slate));
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .intel-card:hover { border-color: rgba(37,99,176,.3); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .intel-card:hover::before { opacity: 1; }
+  .intel-card-icon { font-size: 32px; margin-bottom: 16px; }
+  .intel-card h3 { font-size: 17px; color: var(--navy); margin-bottom: 10px; }
+  .intel-card p  { font-size: 13px; color: var(--slate2); line-height: 1.8; margin-bottom: 14px; }
+  .intel-sub-list { list-style: none; padding-top: 14px; border-top: 1px solid var(--border); }
+  .intel-sub-list li {
+    font-size: 11px; color: var(--slate);
+    padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+  }
+  .intel-sub-list li::before { content: '›'; color: var(--blue); font-weight: 700; font-size: 13px; flex-shrink: 0; }
+
+  .confidential-strip {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .confidential-strip .dot {
+    width: 10px; height: 10px;
+    background: #e74c3c;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse-red 2s infinite;
+  }
+  @keyframes pulse-red {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .5; transform: scale(.8); }
+  }
+  .confidential-strip p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .5px;
+    line-height: 1.6;
+  }
+  .confidential-strip strong { color: rgba(255,255,255,.85); }
+
+  .category-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--bluelt);
+    border: 1px solid rgba(37,99,176,.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .stat-dark {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .stat-dark-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+  .stat-dark-label {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .intel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">Intelligence Solutions</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">🔭</div>
+    <h1 style="color:var(--white);max-width:760px;margin-bottom:20px;">Specialised Intelligence Solutions</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:640px;line-height:1.85;">
+      Mission-critical intelligence, surveillance, and electronic warfare systems for Defence agencies,
+      Law Enforcement, and National Security organisations. From communication interception and
+      jamming to anti-drone defence, ELINT, C4ISR, and secure communications — purpose-built for
+      the most demanding operational environments.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Request a Briefing</div>
+      <a class="btn btn-white" href="../index.html#contact">Contact Us</a>
+    </div>
+    <!-- Classification notice -->
+    <div style="margin-top:40px;display:inline-flex;align-items:center;gap:10px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px 18px;">
+      <span style="font-size:14px;">🔒</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:1px;">
+        Detailed specifications and system capabilities are available under NDA to qualified organisations only.
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div style="background:var(--navy2);padding:36px 48px;">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+    <div class="stat-dark"><div class="stat-dark-num">8</div><div class="stat-dark-label">Specialised Solution Categories</div></div>
+    <div class="stat-dark"><div class="stat-dark-num">LEA</div><div class="stat-dark-label">Law Enforcement Agency Ready</div></div>
+    <div class="stat-dark"><div class="stat-dark-num">C4ISR</div><div class="stat-dark-label">Command, Control & Intelligence</div></div>
+    <div class="stat-dark"><div class="stat-dark-num">NDA</div><div class="stat-dark-label">Confidential Briefings Available</div></div>
+  </div>
+</div>
+
+<!-- SOLUTION CATEGORIES -->
+<div class="section section-off">
+  <div class="section-inner">
+
+    <div class="confidential-strip">
+      <div class="dot"></div>
+      <p><strong>Operational Sensitivity Notice:</strong> The capabilities described on this page are supplied exclusively to verified Defence agencies, Law Enforcement organisations, and authorised Government entities. All engagements are conducted under appropriate legal frameworks and non-disclosure agreements.</p>
+    </div>
+
+    <div class="section-header">
+      <div class="eyebrow">Solution Categories</div>
+      <h2>Intelligence &amp; Electronic Warfare Systems</h2>
+      <p class="lead">A comprehensive portfolio of specialised systems — from signal interception and electronic attack to unmanned systems and forensic analysis platforms.</p>
+    </div>
+
+    <div class="intel-grid">
+
+      <!-- 1. COMMUNICATION INTERCEPTION -->
+      <div class="intel-card">
+        <div class="category-label">Category 01</div>
+        <div class="intel-card-icon">📡</div>
+        <h3>Communication Interception</h3>
+        <p>Passive, semi-active, and hybrid interception systems covering cellular, satellite, Wi-Fi, radio, and microwave link communications — including lawful interception frameworks for LEAs.</p>
+        <ul class="intel-sub-list">
+          <li>Cellphone Interception Systems (Passive / Semi-Active / Hybrid)</li>
+          <li>SDR IMSI Catcher &amp; CDMA Interception</li>
+          <li>Satellite Phone Interception (Thuraya, Iridium, ISAT, BeiDou)</li>
+          <li>Satellite Trunk Interception System</li>
+          <li>Wi-Fi Interception System</li>
+          <li>Radio Interception &amp; Direction Finding (Static / Mobile / Portable)</li>
+          <li>Microwave Link Interception</li>
+          <li>Lawful Interception (LI) Systems</li>
+          <li>Cellphone Geo-Locating System</li>
+          <li>Audio Surveillance (Laser &amp; Through-Wall)</li>
+        </ul>
+      </div>
+
+      <!-- 2. JAMMING SOLUTIONS -->
+      <div class="intel-card">
+        <div class="category-label">Category 02</div>
+        <div class="intel-card-icon">📶</div>
+        <h3>Jamming Solutions</h3>
+        <p>Customisable electronic attack systems for disrupting cellular, satellite, drone, GPS, and radio communications — deployable across fixed, mobile, and portable configurations.</p>
+        <ul class="intel-sub-list">
+          <li>Cellphone Jammer (Standard &amp; Intelligent)</li>
+          <li>Radio Jammer</li>
+          <li>Prison / Facility Jammer</li>
+          <li>Satellite Communication Jammer</li>
+          <li>Bomb &amp; RCIED Jammer</li>
+          <li>GNSS / GPS Jammer</li>
+          <li>Intelligent Wi-Fi Jammer</li>
+        </ul>
+      </div>
+
+      <!-- 3. ANTI-DRONE SYSTEMS -->
+      <div class="intel-card">
+        <div class="category-label">Category 03</div>
+        <div class="intel-card-icon">🚁</div>
+        <h3>Anti-Drone Systems</h3>
+        <p>Layered drone detection and neutralisation solutions using RF detection, jamming, spoofing, and hard-kill laser defence — scalable from portable handheld to integrated facility-wide systems.</p>
+        <ul class="intel-sub-list">
+          <li>Drone RF Detection System</li>
+          <li>Portable RF Detection &amp; Jamming</li>
+          <li>Integrated Drone Defence System</li>
+          <li>Drone Gun (Handheld Neutraliser)</li>
+          <li>Drone Spoofer (GPS Signal Manipulation)</li>
+          <li>Laser Defence — Hard Kill System</li>
+        </ul>
+      </div>
+
+      <!-- 4. COMMUNICATION SECURITY -->
+      <div class="intel-card">
+        <div class="category-label">Category 04</div>
+        <div class="intel-card-icon">🔐</div>
+        <h3>Communication Security</h3>
+        <p>Hardened communication platforms and encryption solutions that enable Trojan-free, quantum-resistant secure communications across cellular and cyber media for sensitive operations.</p>
+        <ul class="intel-sub-list">
+          <li>Secure Smartphone (Salus) — Custom-built hardened device</li>
+          <li>Cross Domain Security Solutions</li>
+          <li>Quantum Resistant Cryptography</li>
+          <li>Hardware-Based Encryption Device</li>
+          <li>Data Diode (Unidirectional Security Gateway)</li>
+        </ul>
+      </div>
+
+      <!-- 5. ANALYSIS SOLUTIONS / C4ISR -->
+      <div class="intel-card">
+        <div class="category-label">Category 05</div>
+        <div class="intel-card-icon">🖥️</div>
+        <h3>Analysis Solutions &amp; C4ISR</h3>
+        <p>Advanced intelligence analysis platforms for law enforcement and defence — combining OSINT, voice and video forensics, cryptanalysis, and big data analytics into unified operational environments.</p>
+        <ul class="intel-sub-list">
+          <li>Command &amp; Control Centre Analysis Solution</li>
+          <li>OSINT (Open Source Intelligence) System</li>
+          <li>Voice Forensic System</li>
+          <li>Video Forensic System</li>
+          <li>Cryptanalysis System</li>
+          <li>Document Analysis System</li>
+          <li>Big Data Analysis Platform</li>
+          <li>Blockchain Analysis</li>
+          <li>PCAP Analysis</li>
+          <li>IPDR, CDR &amp; TDR Analytics</li>
+          <li>Multi-Role Tactical Investigation Unit</li>
+        </ul>
+      </div>
+
+      <!-- 6. ELINT SYSTEMS -->
+      <div class="intel-card">
+        <div class="category-label">Category 06</div>
+        <div class="intel-card-icon">📻</div>
+        <h3>ELINT Systems</h3>
+        <p>Electronic intelligence systems for localising and monitoring electromagnetic transmitters, detecting unauthorised interception activity, and supporting search and rescue operations.</p>
+        <ul class="intel-sub-list">
+          <li>Satellite Geo-Location System</li>
+          <li>Direction Finding System</li>
+          <li>IMSI Catcher Detector &amp; Neutraliser</li>
+          <li>SMS Broadcast System</li>
+          <li>Perimeter Security &amp; Coastal Surveillance</li>
+          <li>Wi-Fi Hunter</li>
+          <li>Handheld RF Signal Detector (TSCM)</li>
+          <li>Search &amp; Rescue Systems</li>
+        </ul>
+      </div>
+
+      <!-- 7. UNMANNED AERIAL SYSTEMS -->
+      <div class="intel-card">
+        <div class="category-label">Category 07</div>
+        <div class="intel-card-icon">✈️</div>
+        <h3>Unmanned Aerial Systems (UAS)</h3>
+        <p>Military and civilian-grade unmanned aerial vehicles for ISR, combat, target acquisition, and loitering munitions applications — across VTOL, rotorcraft, and fixed-wing configurations.</p>
+        <ul class="intel-sub-list">
+          <li>VTOL UAV (Vertical Take-Off &amp; Landing)</li>
+          <li>Unmanned Combat Aerial Vehicles (UCAV)</li>
+          <li>Target Drones</li>
+          <li>Loitering Munitions</li>
+          <li>Tethered UAV (Persistent Surveillance)</li>
+          <li>Rotorcraft UAV</li>
+        </ul>
+      </div>
+
+      <!-- 8. SPECIALISED TRAINING -->
+      <div class="intel-card">
+        <div class="category-label">Category 08</div>
+        <div class="intel-card-icon">🎓</div>
+        <h3>Specialised Training</h3>
+        <p>Customised professional training programmes for defence, intelligence, and law enforcement personnel — delivered by subject matter experts across cryptology, electronic warfare, and cyber security.</p>
+        <ul class="intel-sub-list">
+          <li>Cryptology &amp; Cryptanalysis Training</li>
+          <li>Information Warfare &amp; Electronic Warfare Training</li>
+          <li>Cyber Security &amp; Network Security Training</li>
+          <li>OSINT &amp; Intelligence Analysis Training</li>
+          <li>Counter-Drone Operations Training</li>
+        </ul>
+      </div>
+
+      <!-- 9. PROCUREMENT & SUPPLY -->
+      <div class="intel-card">
+        <div class="category-label">Category 09</div>
+        <div class="intel-card-icon">📦</div>
+        <h3>Procurement &amp; Supply</h3>
+        <p>End-to-end procurement, importation, and supply of specialised intelligence and defence equipment for verified government and defence organisations in Pakistan — with full compliance documentation.</p>
+        <ul class="intel-sub-list">
+          <li>Verified Vendor Sourcing &amp; Due Diligence</li>
+          <li>Import Licensing &amp; Customs Compliance</li>
+          <li>End-User Certificate (EUC) Management</li>
+          <li>Delivery, Installation &amp; Commissioning</li>
+          <li>Operator Training &amp; Handover</li>
+          <li>Ongoing Maintenance &amp; Support Contracts</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE WORK WITH -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Authorised Clients Only</div>
+      <h2>Who We Work With</h2>
+      <p class="lead">These solutions are supplied exclusively to verified, authorised organisations operating within applicable legal and regulatory frameworks.</p>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-icon">🎖️</div>
+        <h3>Defence &amp; Armed Forces</h3>
+        <p>Military branches requiring electronic warfare systems, unmanned platforms, communications intelligence, and secure encrypted communications for operational and strategic missions.</p>
+        <div class="sector-tags"><span class="stag">Electronic Warfare</span><span class="stag">UAS / UAV</span><span class="stag">SIGINT</span><span class="stag">Secure Comms</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏛️</div>
+        <h3>Intelligence Agencies</h3>
+        <p>National intelligence organisations requiring communication interception, OSINT platforms, cryptanalysis, and advanced data analytics to support lawful intelligence operations.</p>
+        <div class="sector-tags"><span class="stag">COMINT</span><span class="stag">OSINT</span><span class="stag">Cryptanalysis</span><span class="stag">Data Analytics</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">👮</div>
+        <h3>Law Enforcement Agencies</h3>
+        <p>Police and law enforcement bodies requiring lawful interception systems, tactical investigation units, forensic analysis platforms, and geo-location capabilities for criminal investigations.</p>
+        <div class="sector-tags"><span class="stag">Lawful Interception</span><span class="stag">Geo-Location</span><span class="stag">Forensics</span><span class="stag">CDR / IPDR Analytics</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🛡️</div>
+        <h3>National Security &amp; Border Control</h3>
+        <p>Border security, counter-terrorism, and national security agencies requiring perimeter surveillance, anti-drone systems, ELINT platforms, and TSCM capabilities.</p>
+        <div class="sector-tags"><span class="stag">Border Surveillance</span><span class="stag">Anti-Drone</span><span class="stag">TSCM</span><span class="stag">Perimeter Security</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLIANCE NOTE -->
+<div class="section section-off">
+  <div class="section-inner" style="max-width:860px;">
+    <div class="section-header" style="text-align:center;margin-bottom:32px;">
+      <div class="eyebrow" style="justify-content:center;">Legal &amp; Compliance Framework</div>
+      <h2>Responsible Supply</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:28px;margin-bottom:14px;">📜</div>
+        <h4 style="color:var(--navy);margin-bottom:10px;">End-User Verification</h4>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.8;">All intelligence and electronic warfare equipment is supplied only to verified government and defence entities. We require End-User Certificates (EUC) and conduct thorough due diligence on every engagement before any equipment is sourced or supplied.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:28px;margin-bottom:14px;">⚖️</div>
+        <h4 style="color:var(--navy);margin-bottom:10px;">Legal Framework Compliance</h4>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.8;">All interception and surveillance capabilities are supplied and operated strictly within applicable national laws and international legal frameworks. DAQAI does not supply any capability for use outside of authorised lawful frameworks.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:28px;margin-bottom:14px;">🔒</div>
+        <h4 style="color:var(--navy);margin-bottom:10px;">Confidential Engagements</h4>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.8;">All discussions, specifications, and procurement activities related to intelligence systems are conducted under strict non-disclosure agreements. Detailed technical specifications are only shared with verified, authorised counterparts.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:28px;margin-bottom:14px;">🌐</div>
+        <h4 style="color:var(--navy);margin-bottom:10px;">Export Control Compliance</h4>
+        <p style="font-size:13px;color:var(--slate2);line-height:1.8;">DAQAI strictly complies with all applicable export control regulations and international trade frameworks governing the supply of dual-use and defence equipment. All import licences and permits are obtained prior to procurement.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Confidential Enquiries Welcome</div>
+    <h2>Request a Classified Briefing</h2>
+    <p>To discuss specific capability requirements, system specifications, or procurement timelines, contact our intelligence solutions team directly. All enquiries are handled with strict confidentiality.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Request a Briefing</div>
+      <a class="btn btn-white" href="mailto:contact@daqai.org">Email Directly</a>
+    </div>
+    <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;">
+      All enquiries handled under NDA · Verified organisations only
+    </div>
+  </div>
+
+  <!-- OTHER SERVICES -->
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="managed-it.html"><div class="other-svc-icon">🖥️</div><p>Managed IT</p></a>
+      <a class="other-svc" href="ict-consulting.html"><div class="other-svc-icon">💡</div><p>ICT Consulting</p></a>
+      <a class="other-svc" href="hardware-software.html"><div class="other-svc-icon">⚙️</div><p>Hardware &amp; Software</p></a>
+      <a class="other-svc" href="software-development.html"><div class="other-svc-icon">🔧</div><p>Software Development</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="intelligence-solutions.html">Intelligence Solutions</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Confidential Enquiry</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Request a Briefing</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">All enquiries are handled confidentially. Verified organisations only.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Your Name" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Agency / Ministry" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Official Email Address *</label><input type="email" required placeholder="name@organisation.gov.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 0000000" class="form-input"/></div>
+        <div>
+          <label class="form-label">Capability of Interest</label>
+          <select class="form-input">
+            <option value="">Select category…</option>
+            <option>Communication Interception</option>
+            <option>Jamming Solutions</option>
+            <option>Anti-Drone Systems</option>
+            <option>Communication Security</option>
+            <option>Analysis Solutions / C4ISR</option>
+            <option>ELINT Systems</option>
+            <option>Unmanned Aerial Systems</option>
+            <option>Specialised Training</option>
+            <option>Procurement &amp; Supply</option>
+            <option>General Intelligence Enquiry</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Requirement Details</label><textarea rows="3" placeholder="Brief description of your operational requirement…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">Handled with strict <strong>confidentiality</strong>.</p>
+        <button type="submit" class="btn btn-navy">Submit Enquiry →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>.</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your enquiry has been received and will be handled with strict confidentiality. Our team will be in touch shortly.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
