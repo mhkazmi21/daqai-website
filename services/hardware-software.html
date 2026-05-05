@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hardware & Software Supply — DAQAI</title>
+<meta name="description" content="DAQAI Hardware & Software Supply — authorised reseller of Dell Technologies, Lenovo, NexaVM and SGBox enterprise solutions. Servers, storage, networking, PCs, ERP, cloud licensing and more for organisations in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* Vendor showcase */
+  .vendor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .vendor-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 24px;
+    text-align: center;
+    transition: all .25s;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .vendor-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--slate));
+    transform: scaleX(0);
+    transition: transform .25s;
+  }
+  .vendor-card:hover { border-color: rgba(37,99,176,.3); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .vendor-card:hover::after { transform: scaleX(1); }
+  .vendor-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .vendor-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--blue);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .vendor-desc { font-size: 12px; color: var(--slate2); line-height: 1.75; margin-bottom: 16px; }
+  .vendor-products { list-style: none; text-align: left; }
+  .vendor-products li {
+    font-size: 11px;
+    color: var(--slate);
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    border-bottom: 1px solid var(--off2);
+  }
+  .vendor-products li:last-child { border-bottom: none; }
+  .vendor-products li::before { content: '›'; color: var(--blue); font-weight: 700; }
+
+  /* Category cards */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .cat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 30px 26px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+  }
+  .cat-card:hover { border-color: rgba(37,99,176,.3); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .cat-icon { font-size: 30px; margin-bottom: 14px; }
+  .cat-card h4 { font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+  .cat-card p  { font-size: 12px; color: var(--slate2); line-height: 1.8; margin-bottom: 12px; }
+  .cat-list { list-style: none; }
+  .cat-list li {
+    font-size: 11px; color: var(--slate);
+    padding: 3px 0;
+    display: flex; gap: 7px; align-items: flex-start;
+  }
+  .cat-list li::before { content: '✓'; color: var(--blue); font-weight: 700; flex-shrink: 0; font-size: 10px; margin-top: 1px; }
+
+  /* Process timeline */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 48px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 22px; left: 10%; right: 10%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .tl-step { text-align: center; position: relative; z-index: 1; padding: 0 8px; }
+  .tl-dot {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 600; color: var(--white);
+    margin: 0 auto 16px;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .tl-step h4 { font-size: 13px; color: var(--navy); margin-bottom: 6px; }
+  .tl-step p  { font-size: 11px; color: var(--slate2); line-height: 1.6; }
+
+  /* Comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 13px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .compare-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    letter-spacing: .3px;
+  }
+  .compare-table th:first-child { width: 40%; }
+  .compare-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--slate2);
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: var(--off); }
+  .compare-table td:first-child { font-weight: 600; color: var(--navy); }
+  .check { color: var(--blue); font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .vendor-grid  { grid-template-columns: 1fr 1fr; }
+    .cat-grid     { grid-template-columns: 1fr; }
+    .timeline     { grid-template-columns: 1fr; gap: 20px; }
+    .timeline::before { display: none; }
+    .compare-table { font-size: 11px; }
+    .compare-table th,
+    .compare-table td { padding: 10px 12px; }
+  }
+  @media (max-width: 560px) {
+    .vendor-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request a Quote</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">Hardware &amp; Software</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">⚙️</div>
+    <h1 style="color:var(--white);max-width:760px;margin-bottom:20px;">Hardware &amp; Software Supply</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:640px;line-height:1.85;">
+      Authorised reseller of enterprise-grade technology from Dell Technologies, Lenovo 360,
+      NexaVM, SGBox, and more — with expert procurement, configuration, and deployment support
+      from a team that understands your environment.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Request a Quote</div>
+      <a class="btn btn-white" href="#vendors">Our Vendors</a>
+    </div>
+    <!-- Badges -->
+    <div style="display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.5px;">✓ Dell Technologies Authorized</div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.5px;">✓ Lenovo 360 Authorized</div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.5px;">✓ NexaVM Enterprise Reseller</div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.5px;">✓ SGBox Security Partner</div>
+    </div>
+  </div>
+</div>
+
+<!-- VENDOR SHOWCASE -->
+<div id="vendors" class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Authorised Partnerships</div>
+      <h2>Our Vendor Ecosystem</h2>
+      <p class="lead">Every product we supply comes through authorised channels — with full manufacturer warranty, certified configurations, and vendor-backed support.</p>
+    </div>
+    <div class="vendor-grid">
+
+      <div class="vendor-card">
+        <div class="vendor-name">Dell</div>
+        <span class="vendor-tier">Technologies Authorized Partner</span>
+        <p class="vendor-desc">Enterprise hardware and infrastructure solutions for organisations of all sizes — from workstations to full data centre deployments.</p>
+        <ul class="vendor-products">
+          <li>PowerEdge Servers</li>
+          <li>PowerStore &amp; PowerVault Storage</li>
+          <li>Networking Switches &amp; Routers</li>
+          <li>Latitude, Precision &amp; OptiPlex</li>
+          <li>Dell EMC Hyper-Converged</li>
+          <li>ProSupport Service Contracts</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-name">Lenovo</div>
+        <span class="vendor-tier">360 Authorized Partner</span>
+        <p class="vendor-desc">Intelligent devices and infrastructure solutions — from enterprise servers and storage to ThinkPad laptops and workstations for business users.</p>
+        <ul class="vendor-products">
+          <li>ThinkSystem Servers</li>
+          <li>ThinkAgile HCI Solutions</li>
+          <li>ThinkPad &amp; ThinkBook Laptops</li>
+          <li>ThinkStation Workstations</li>
+          <li>Storage Area Networks</li>
+          <li>Lenovo Premier Support</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-name">NexaVM</div>
+        <span class="vendor-tier">Enterprise Reseller</span>
+        <p class="vendor-desc">Swiss-engineered enterprise virtualisation and hyper-converged infrastructure — the leading VMware alternative with no forced bundling or surprise price hikes.</p>
+        <ul class="vendor-products">
+          <li>nSSV — Secure Server Virtualisation</li>
+          <li>nHCI — Hyper-Converged Infrastructure</li>
+          <li>nSAN — Software-Defined Storage</li>
+          <li>nCSSV — Cloud Infrastructure</li>
+          <li>VMware Migration Support</li>
+          <li>Licensing &amp; Support Contracts</li>
+        </ul>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-name">SGBox</div>
+        <span class="vendor-tier">Security Partner</span>
+        <p class="vendor-desc">Next-generation security operations platform combining SIEM, SOAR, UBA, and threat intelligence in a single unified stack for enterprise security teams.</p>
+        <ul class="vendor-products">
+          <li>SGBox SIEM Platform</li>
+          <li>SOAR Automation Engine</li>
+          <li>User Behaviour Analytics (UBA)</li>
+          <li>Threat Intelligence Feeds</li>
+          <li>Active Directory Auditing</li>
+          <li>Incident Management Module</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT CATEGORIES -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">What We Supply</div>
+      <h2>Product Categories</h2>
+      <p class="lead">A comprehensive range of enterprise technology — from individual devices through to full data centre infrastructure.</p>
+    </div>
+    <div class="cat-grid">
+
+      <div class="cat-card">
+        <div class="cat-icon">🗄️</div>
+        <h4>Servers &amp; Storage</h4>
+        <p>Enterprise rack and tower servers, SAN, NAS, and software-defined storage — sized and configured for your workloads.</p>
+        <ul class="cat-list">
+          <li>Rack &amp; Tower Servers</li>
+          <li>SAN / NAS / HCI Storage</li>
+          <li>NVMe &amp; Flash Arrays</li>
+          <li>Tape &amp; Archive Solutions</li>
+          <li>RAID &amp; Backup Appliances</li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-icon">🖧</div>
+        <h4>Networking Equipment</h4>
+        <p>Switches, routers, firewalls, and wireless access points — for campus, data centre, and branch environments.</p>
+        <ul class="cat-list">
+          <li>Core &amp; Access Switches</li>
+          <li>Enterprise Routers</li>
+          <li>Next-Gen Firewalls</li>
+          <li>Wireless Access Points &amp; Controllers</li>
+          <li>SD-WAN Appliances</li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-icon">💻</div>
+        <h4>PCs, Laptops &amp; Workstations</h4>
+        <p>Business-grade computing for every role — from standard office PCs to high-performance engineering workstations.</p>
+        <ul class="cat-list">
+          <li>Business Laptops &amp; Ultrabooks</li>
+          <li>Desktop PCs &amp; All-in-Ones</li>
+          <li>Engineering Workstations</li>
+          <li>Ruggedised &amp; Secure Devices</li>
+          <li>Monitors, Peripherals &amp; Docking</li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-icon">🖥️</div>
+        <h4>Virtualisation &amp; HCI</h4>
+        <p>Software-defined compute, storage, and networking — from NexaVM HCI to private cloud infrastructure.</p>
+        <ul class="cat-list">
+          <li>NexaVM Server Virtualisation</li>
+          <li>Hyper-Converged Infrastructure</li>
+          <li>Software-Defined Storage</li>
+          <li>Private Cloud Platforms</li>
+          <li>VMware Migration &amp; Replacement</li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-icon">📦</div>
+        <h4>Enterprise Software &amp; Licensing</h4>
+        <p>Software licensing for ERP, CRM, productivity, and security platforms — including volume agreements and renewal management.</p>
+        <ul class="cat-list">
+          <li>Microsoft 365 &amp; Azure Licensing</li>
+          <li>ERP &amp; CRM Platforms</li>
+          <li>Security Software Licensing</li>
+          <li>Volume Licensing Agreements</li>
+          <li>Licence Compliance Audits</li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-icon">🔐</div>
+        <h4>Security Hardware</h4>
+        <p>Physical security appliances, encryption devices, and hardware security modules — for organisations with the highest security requirements.</p>
+        <ul class="cat-list">
+          <li>Next-Gen Firewall Appliances</li>
+          <li>Hardware Encryption Devices</li>
+          <li>Hardware Security Modules (HSM)</li>
+          <li>Data Diodes</li>
+          <li>Secure KVM &amp; Console Switches</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHY BUY THROUGH DAQAI -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header split">
+      <div>
+        <div class="eyebrow">Why Buy Through DAQAI</div>
+        <h2>More Than Just a Reseller</h2>
+      </div>
+      <p class="lead" style="margin-top:0;max-width:380px;">We don't just ship boxes. We help you choose the right equipment, configure it correctly, and make sure it works in your environment.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h3>Authorised Channels Only</h3>
+        <p>Every product is sourced through authorised vendor channels — guaranteeing genuine equipment, full manufacturer warranty, and access to vendor support from day one.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧠</div>
+        <h3>Expert Pre-Sales Advisory</h3>
+        <p>Our engineers help you select the right specification for your workload — so you don't overspend on hardware you don't need or underspend on hardware that won't perform.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚙️</div>
+        <h3>Configuration &amp; Deployment</h3>
+        <p>We configure, rack, stack, and commission your hardware — integrating it with your existing infrastructure so it's operational from day one, not day ten.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📋</div>
+        <h3>Full Compliance Documentation</h3>
+        <p>For government and defence procurement, we provide complete documentation — country of origin certificates, end-user declarations, and import compliance records.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔄</div>
+        <h3>Lifecycle Management</h3>
+        <p>From initial procurement through warranty management, refresh planning, and end-of-life disposal — we manage the full hardware lifecycle so you don't have to.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h3>Competitive Pricing</h3>
+        <p>Our authorised partner status gives us access to vendor pricing programmes and volume discounts that we pass on to our clients — without compromising on warranty or support.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCUREMENT PROCESS -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">From Enquiry to Delivery</div>
+      <h2>Our Procurement Process</h2>
+      <p class="lead" style="margin:16px auto 0;">A structured, transparent process from your initial requirement through to installation and sign-off.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-dot">01</div>
+        <h4>Requirements</h4>
+        <p>We understand your technical specs, budget, timeline, and compliance needs.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">02</div>
+        <h4>Specification</h4>
+        <p>Our engineers recommend the right products and configurations for your environment.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">03</div>
+        <h4>Quotation</h4>
+        <p>Detailed quote with full product specs, warranty terms, and delivery timeline.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">04</div>
+        <h4>Procurement</h4>
+        <p>Order placed through authorised vendor channels with full compliance documentation.</p>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">05</div>
+        <h4>Delivery &amp; Install</h4>
+        <p>Delivery, configuration, installation, and commissioning — with full handover and sign-off.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEXAVM HIGHLIGHT -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Featured: VMware Alternative</div>
+      <h2>Why Organisations Are Switching to NexaVM</h2>
+      <p class="lead">Broadcom's VMware acquisition triggered price increases of up to 1,050%. NexaVM is the enterprise-grade alternative — and DAQAI is Pakistan's authorised reseller.</p>
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th>VMware (Broadcom)</th>
+          <th>NexaVM (via DAQAI)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Licensing Model</td>
+          <td>Subscription-only (perpetual eliminated)</td>
+          <td><span class="check">✓</span> Flexible — subscription or perpetual</td>
+        </tr>
+        <tr>
+          <td>Pricing Transparency</td>
+          <td>Complex bundles; 400–1,050% increases reported</td>
+          <td><span class="check">✓</span> Linear, predictable pricing</td>
+        </tr>
+        <tr>
+          <td>Hardware Dependency</td>
+          <td>Certified hardware lists; increasing restrictions</td>
+          <td><span class="check">✓</span> Fully hardware-independent</td>
+        </tr>
+        <tr>
+          <td>Management Console</td>
+          <td>vCenter — separate licence required</td>
+          <td><span class="check">✓</span> Unified console — included</td>
+        </tr>
+        <tr>
+          <td>Storage (SAN equivalent)</td>
+          <td>vSAN — expensive add-on</td>
+          <td><span class="check">✓</span> nSAN — included in HCI bundle</td>
+        </tr>
+        <tr>
+          <td>Network Virtualisation</td>
+          <td>NSX — expensive add-on</td>
+          <td><span class="check">✓</span> Built-in distributed switching</td>
+        </tr>
+        <tr>
+          <td>Vendor Lock-in</td>
+          <td>High — proprietary formats</td>
+          <td><span class="check">✓</span> None — open architecture</td>
+        </tr>
+        <tr>
+          <td>Local Support (Pakistan)</td>
+          <td>No local authorised partner</td>
+          <td><span class="check">✓</span> DAQAI — authorised local reseller</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px;text-align:center;">
+      <a class="btn btn-navy" href="../insights.html" style="text-decoration:none;">Read the Full NexaVM vs VMware Analysis →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Ready to Procure?</div>
+    <h2>Get a quote for your hardware or software requirement.</h2>
+    <p>Share your specifications and we'll come back with a competitive, fully documented quote — usually within 48 hours.</p>
+    <div class="btn btn-blue" onclick="openModal()">Request a Quote</div>
+  </div>
+
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="managed-it.html"><div class="other-svc-icon">🖥️</div><p>Managed IT</p></a>
+      <a class="other-svc" href="ict-consulting.html"><div class="other-svc-icon">💡</div><p>ICT Consulting</p></a>
+      <a class="other-svc" href="resource-outsourcing.html"><div class="other-svc-icon">👥</div><p>Resource Outsourcing</p></a>
+      <a class="other-svc" href="software-development.html"><div class="other-svc-icon">🔧</div><p>Software Development</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Hardware &amp; Software</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Request a Quote</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Share your requirements and we'll come back with a competitive quote within 48 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Product Category</label>
+          <select class="form-input">
+            <option value="">Select category…</option>
+            <option>Servers &amp; Storage</option>
+            <option>Networking Equipment</option>
+            <option>PCs, Laptops &amp; Workstations</option>
+            <option>Virtualisation / NexaVM</option>
+            <option>Enterprise Software &amp; Licensing</option>
+            <option>Security Hardware / SGBox</option>
+            <option>Multiple Categories</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Requirement Details</label><textarea rows="3" placeholder="Describe what you need — quantity, specs, timeline, budget range…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">Quote within <strong>48 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Request Quote →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your quote request has been received. We'll be in touch within <strong>48 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
