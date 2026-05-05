@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Software Development — DAQAI</title>
+<meta name="description" content="DAQAI Software Development — bespoke enterprise software, web and mobile applications, API integrations, cloud-native platforms, and legacy modernisation for Defence, Government, and Healthcare organisations in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* What we build */
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .build-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 26px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .build-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--slate));
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .build-card:hover { border-color: rgba(37,99,176,.3); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .build-card:hover::before { opacity: 1; }
+  .build-icon { font-size: 30px; margin-bottom: 14px; }
+  .build-card h4 { font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+  .build-card p  { font-size: 12px; color: var(--slate2); line-height: 1.85; margin-bottom: 14px; }
+  .build-examples {
+    list-style: none;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .build-examples li {
+    font-size: 11px; color: var(--slate);
+    padding: 4px 0;
+    display: flex; gap: 7px; align-items: flex-start;
+  }
+  .build-examples li::before { content: '›'; color: var(--blue); font-weight: 700; font-size: 13px; flex-shrink: 0; }
+
+  /* Tech stack */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .stack-group {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+  }
+  .stack-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-tag {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 4px 8px;
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--slate2);
+    transition: all .2s;
+  }
+  .stack-tag:hover { background: var(--bluelt); border-color: rgba(37,99,176,.2); color: var(--blue); }
+
+  /* SDLC phases */
+  .sdlc {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    margin-top: 48px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .sdlc-phase {
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+    transition: background .2s;
+    background: var(--white);
+  }
+  .sdlc-phase:last-child { border-right: none; }
+  .sdlc-phase:hover { background: var(--off); }
+  .sdlc-num {
+    width: 36px; height: 36px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 600; color: var(--white);
+    margin: 0 auto 12px;
+  }
+  .sdlc-phase h4 { font-size: 12px; color: var(--navy); margin-bottom: 6px; font-weight: 600; }
+  .sdlc-phase p  { font-size: 10px; color: var(--slate2); line-height: 1.6; }
+
+  /* Security-first callout */
+  .security-callout {
+    background: linear-gradient(135deg, var(--navy), var(--slate));
+    border-radius: 12px;
+    padding: 48px 52px;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    align-items: center;
+  }
+  .security-callout h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .security-callout p {
+    font-size: 14px;
+    color: rgba(255,255,255,.65);
+    line-height: 1.85;
+  }
+  .security-list { list-style: none; }
+  .security-list li {
+    font-size: 13px;
+    color: rgba(255,255,255,.75);
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    display: flex; gap: 12px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .security-list li:last-child { border-bottom: none; }
+  .security-list li::before { content: '✓'; color: #2ecc71; font-weight: 700; flex-shrink: 0; }
+
+  /* Sector use cases */
+  .usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .usecase-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+  }
+  .usecase-card:hover { border-color: rgba(37,99,176,.3); box-shadow: var(--shadow-md); }
+  .usecase-sector {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .usecase-card h3 { font-size: 16px; color: var(--navy); margin-bottom: 10px; }
+  .usecase-card p  { font-size: 13px; color: var(--slate2); line-height: 1.8; margin-bottom: 14px; }
+  .usecase-examples { display: flex; flex-wrap: wrap; gap: 6px; }
+  .usecase-tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--slate2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 900px) {
+    .build-grid      { grid-template-columns: 1fr; }
+    .stack-grid      { grid-template-columns: 1fr 1fr; }
+    .sdlc            { grid-template-columns: repeat(3, 1fr); }
+    .sdlc-phase      { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+    .sdlc-phase:nth-child(3) { border-right: none; }
+    .sdlc-phase:nth-child(4),
+    .sdlc-phase:nth-child(5) { border-bottom: none; }
+    .sdlc-phase:nth-child(6) { border-right: none; border-bottom: none; }
+    .security-callout { grid-template-columns: 1fr; gap: 28px; padding: 32px 28px; }
+    .usecase-grid    { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .stack-grid { grid-template-columns: 1fr; }
+    .sdlc       { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Discuss Your Project</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">Software Development</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">🔧</div>
+    <h1 style="color:var(--white);max-width:760px;margin-bottom:20px;">Software Development</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:640px;line-height:1.85;">
+      Bespoke enterprise software, web and mobile applications, and cloud-native platforms —
+      built on modern, secure architectures and designed specifically for the operational
+      demands of Defence, Government, and Healthcare organisations.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Discuss Your Project</div>
+      <a class="btn btn-white" href="#what-we-build">What We Build</a>
+    </div>
+    <!-- Key principles -->
+    <div style="display:flex;gap:20px;margin-top:40px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Security-first architecture</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Agile delivery methodology</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Full source code ownership</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Post-launch support included</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE BUILD -->
+<div id="what-we-build" class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Our Capabilities</div>
+      <h2>What We Build</h2>
+      <p class="lead">Custom software solutions across every layer of the technology stack — from enterprise backends to citizen-facing mobile applications.</p>
+    </div>
+    <div class="build-grid">
+
+      <div class="build-card">
+        <div class="build-icon">🏢</div>
+        <h4>Custom Enterprise Applications</h4>
+        <p>Bespoke enterprise platforms that replace manual processes, consolidate disparate systems, and deliver measurable efficiency gains across your organisation.</p>
+        <ul class="build-examples">
+          <li>ERP / CRM replacements &amp; extensions</li>
+          <li>Internal workflow automation platforms</li>
+          <li>Document management systems</li>
+          <li>HR &amp; payroll management systems</li>
+          <li>Asset &amp; inventory management platforms</li>
+        </ul>
+      </div>
+
+      <div class="build-card">
+        <div class="build-icon">🌐</div>
+        <h4>Web Application Development</h4>
+        <p>Secure, responsive web applications — from internal portals and admin dashboards to public-facing digital services — built on modern frameworks with accessibility and performance at the core.</p>
+        <ul class="build-examples">
+          <li>Government citizen portals</li>
+          <li>Internal staff portals &amp; intranets</li>
+          <li>Operations dashboards &amp; reporting tools</li>
+          <li>E-procurement &amp; tendering platforms</li>
+          <li>Patient-facing healthcare portals</li>
+        </ul>
+      </div>
+
+      <div class="build-card">
+        <div class="build-icon">📱</div>
+        <h4>Mobile Application Development</h4>
+        <p>iOS and Android applications for field operations, patient management, staff productivity, and citizen-facing services — built with security and offline capability in mind.</p>
+        <ul class="build-examples">
+          <li>Field operations &amp; inspection apps</li>
+          <li>Patient management &amp; telehealth apps</li>
+          <li>Citizen service mobile applications</li>
+          <li>Internal staff productivity tools</li>
+          <li>Secure messaging &amp; comms apps</li>
+        </ul>
+      </div>
+
+      <div class="build-card">
+        <div class="build-icon">🔗</div>
+        <h4>API Integration &amp; Development</h4>
+        <p>Design and build APIs that connect your systems, enable secure data exchange between platforms, and support automation — reducing manual data entry and eliminating information silos.</p>
+        <ul class="build-examples">
+          <li>RESTful &amp; GraphQL API design</li>
+          <li>Third-party system integrations</li>
+          <li>Legacy system API wrappers</li>
+          <li>Real-time data pipeline development</li>
+          <li>API gateway &amp; management setup</li>
+        </ul>
+      </div>
+
+      <div class="build-card">
+        <div class="build-icon">☁️</div>
+        <h4>Cloud-Native Applications</h4>
+        <p>Applications designed and built for cloud deployment from day one — scalable, resilient, and cost-optimised across Azure, AWS, or private cloud infrastructure.</p>
+        <ul class="build-examples">
+          <li>Microservices architecture design</li>
+          <li>Containerised applications (Docker / K8s)</li>
+          <li>Serverless function development</li>
+          <li>Cloud-native data platforms</li>
+          <li>Multi-region high-availability systems</li>
+        </ul>
+      </div>
+
+      <div class="build-card">
+        <div class="build-icon">🔄</div>
+        <h4>Legacy System Modernisation</h4>
+        <p>Migrate and modernise aging systems without disrupting operations — re-platforming legacy applications to modern, supportable, and secure architectures with zero data loss.</p>
+        <ul class="build-examples">
+          <li>Legacy codebase assessment &amp; audit</li>
+          <li>Strangler fig pattern migration</li>
+          <li>Database migration &amp; modernisation</li>
+          <li>UI/UX redesign for legacy systems</li>
+          <li>Phased cutover with rollback planning</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY FIRST -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="security-callout">
+      <div>
+        <div class="eyebrow light">Security by Design</div>
+        <h3>Every Line of Code Is Written With Security in Mind</h3>
+        <p>In Defence, Government, and Healthcare environments, software security is not a feature — it is a fundamental requirement. We build it in from the architecture stage, not as an afterthought before go-live.</p>
+      </div>
+      <div>
+        <ul class="security-list">
+          <li>Threat modelling during architecture phase</li>
+          <li>OWASP Top 10 compliance on every build</li>
+          <li>Static Application Security Testing (SAST) integrated into CI/CD pipeline</li>
+          <li>Dynamic Application Security Testing (DAST) before every release</li>
+          <li>Penetration testing prior to go-live</li>
+          <li>Role-based access control (RBAC) by default</li>
+          <li>Encryption at rest and in transit — always</li>
+          <li>Full audit logging and activity monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SDLC -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Our Development Process</div>
+      <h2>How We Build Software</h2>
+      <p class="lead" style="margin:16px auto 0;max-width:560px;">A structured, transparent process with regular demos and checkpoints — so you always know exactly where your project stands.</p>
+    </div>
+    <div class="sdlc">
+      <div class="sdlc-phase">
+        <div class="sdlc-num">01</div>
+        <h4>Discover</h4>
+        <p>Requirements workshops, user story mapping, and stakeholder alignment to define what we're building and why.</p>
+      </div>
+      <div class="sdlc-phase">
+        <div class="sdlc-num">02</div>
+        <h4>Design</h4>
+        <p>System architecture, security design, UX wireframes, and data modelling — reviewed and approved before development begins.</p>
+      </div>
+      <div class="sdlc-phase">
+        <div class="sdlc-num">03</div>
+        <h4>Build</h4>
+        <p>Agile sprints with fortnightly demos. Continuous integration, automated testing, and security scanning throughout.</p>
+      </div>
+      <div class="sdlc-phase">
+        <div class="sdlc-num">04</div>
+        <h4>Test</h4>
+        <p>Functional, performance, and security testing — including UAT with your team and penetration testing before release.</p>
+      </div>
+      <div class="sdlc-phase">
+        <div class="sdlc-num">05</div>
+        <h4>Deploy</h4>
+        <p>Managed deployment with rollback capability, staff training, full documentation, and go-live support.</p>
+      </div>
+      <div class="sdlc-phase">
+        <div class="sdlc-num">06</div>
+        <h4>Support</h4>
+        <p>Post-launch monitoring, bug fixing, and ongoing feature development — as a managed support contract or on-demand.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TECH STACK -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Technology Stack</div>
+      <h2>Technologies We Work With</h2>
+      <p class="lead">We are technology-agnostic — we recommend the right tool for your specific context, not the one we happen to prefer.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <div class="stack-group-label">Frontend</div>
+        <div class="stack-tags">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Vue.js</span>
+          <span class="stack-tag">Angular</span>
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Backend</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Django</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">.NET / C#</span>
+          <span class="stack-tag">Java / Spring</span>
+          <span class="stack-tag">PHP / Laravel</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Mobile</div>
+        <div class="stack-tags">
+          <span class="stack-tag">React Native</span>
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">Swift (iOS)</span>
+          <span class="stack-tag">Kotlin (Android)</span>
+          <span class="stack-tag">PWA</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Database</div>
+        <div class="stack-tags">
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">MySQL / MariaDB</span>
+          <span class="stack-tag">MS SQL Server</span>
+          <span class="stack-tag">MongoDB</span>
+          <span class="stack-tag">Redis</span>
+          <span class="stack-tag">Elasticsearch</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Cloud &amp; DevOps</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Azure</span>
+          <span class="stack-tag">AWS</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">GitHub Actions</span>
+          <span class="stack-tag">Terraform</span>
+          <span class="stack-tag">Ansible</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Security &amp; Testing</div>
+        <div class="stack-tags">
+          <span class="stack-tag">OWASP ZAP</span>
+          <span class="stack-tag">SonarQube</span>
+          <span class="stack-tag">Burp Suite</span>
+          <span class="stack-tag">Jest / Pytest</span>
+          <span class="stack-tag">Selenium</span>
+          <span class="stack-tag">Snyk</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">APIs &amp; Integration</div>
+        <div class="stack-tags">
+          <span class="stack-tag">REST</span>
+          <span class="stack-tag">GraphQL</span>
+          <span class="stack-tag">gRPC</span>
+          <span class="stack-tag">Kafka</span>
+          <span class="stack-tag">RabbitMQ</span>
+          <span class="stack-tag">WebSockets</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">AI &amp; Data</div>
+        <div class="stack-tags">
+          <span class="stack-tag">Python / Pandas</span>
+          <span class="stack-tag">TensorFlow</span>
+          <span class="stack-tag">OpenAI APIs</span>
+          <span class="stack-tag">Power BI</span>
+          <span class="stack-tag">Apache Spark</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTOR USE CASES -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Real-World Applications</div>
+      <h2>What We Build — By Sector</h2>
+      <p class="lead">Software we design is purpose-built for the operational reality of your sector — not adapted from a generic template.</p>
+    </div>
+    <div class="usecase-grid">
+
+      <div class="usecase-card">
+        <div class="usecase-sector">Defence &amp; National Security</div>
+        <h3>Mission-Critical Defence Software</h3>
+        <p>Secure, high-availability software for defence operations — built to run in classified environments, offline-capable where required, and hardened against adversarial threats.</p>
+        <div class="usecase-examples">
+          <span class="usecase-tag">Operations Management Systems</span>
+          <span class="usecase-tag">Secure Comms Platforms</span>
+          <span class="usecase-tag">Intelligence Analysis Tools</span>
+          <span class="usecase-tag">Asset Tracking Systems</span>
+          <span class="usecase-tag">Training Management Platforms</span>
+        </div>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-sector">Government &amp; Public Sector</div>
+        <h3>Digital Government Services</h3>
+        <p>Citizen-facing digital services and internal government platforms — designed for accessibility, scalability, and compliance with national data protection standards.</p>
+        <div class="usecase-examples">
+          <span class="usecase-tag">Citizen Service Portals</span>
+          <span class="usecase-tag">E-Procurement Platforms</span>
+          <span class="usecase-tag">Case Management Systems</span>
+          <span class="usecase-tag">Document Management</span>
+          <span class="usecase-tag">Compliance Reporting Tools</span>
+        </div>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-sector">Healthcare</div>
+        <h3>Clinical &amp; Patient Technology</h3>
+        <p>Healthcare software built around clinical workflows — HIPAA-compliant, interoperable with existing systems, and designed with patient safety and data privacy as core requirements.</p>
+        <div class="usecase-examples">
+          <span class="usecase-tag">Patient Management Systems</span>
+          <span class="usecase-tag">Telemedicine Platforms</span>
+          <span class="usecase-tag">Clinical Reporting Tools</span>
+          <span class="usecase-tag">Appointment Booking Systems</span>
+          <span class="usecase-tag">HIPAA-Compliant Data Platforms</span>
+        </div>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-sector">Enterprise &amp; Commercial</div>
+        <h3>Enterprise Transformation Software</h3>
+        <p>Custom enterprise platforms that replace off-the-shelf tools that no longer fit — or automate processes that were previously entirely manual, driving measurable operational efficiency.</p>
+        <div class="usecase-examples">
+          <span class="usecase-tag">ERP / CRM Customisation</span>
+          <span class="usecase-tag">Workflow Automation</span>
+          <span class="usecase-tag">Business Intelligence Dashboards</span>
+          <span class="usecase-tag">Customer-Facing Portals</span>
+          <span class="usecase-tag">Supply Chain Systems</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHY DAQAI FOR DEV -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Why Build With DAQAI</div>
+      <h2>What Makes Us Different</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h3>Security Is Not Optional</h3>
+        <p>Every application we build is designed with security from the first architecture diagram. Threat modelling, OWASP compliance, SAST/DAST scanning, and penetration testing are standard — not extras.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏗️</div>
+        <h3>Built to Last</h3>
+        <p>We write clean, documented, maintainable code. When the project ends, you have full source code ownership and documentation that means any competent development team can continue the work.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔍</div>
+        <h3>Transparent Delivery</h3>
+        <p>Fortnightly sprint demos, a shared project dashboard, and no surprises. You see exactly what has been built, what's next, and whether the project is on track — throughout the engagement.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h3>Sector-Specific Experience</h3>
+        <p>We understand the operational reality of Defence, Government, and Healthcare environments — the security constraints, procurement processes, and user context that generic software firms overlook.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Agile Without the Jargon</h3>
+        <p>We use agile methods because they deliver better outcomes — not because they're fashionable. Every sprint produces working software you can see, test, and give feedback on.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔧</div>
+        <h3>Full-Stack Capability</h3>
+        <p>From database design through backend API development to frontend and mobile — our team covers the full stack. No need to coordinate multiple vendors for a single project.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Start the Conversation</div>
+    <h2>Have a software project in mind?</h2>
+    <p>Tell us what you're trying to build, what problem it solves, and when you need it — and we'll come back with a scope, timeline, and approach within 48 hours.</p>
+    <div class="btn btn-blue" onclick="openModal()">Discuss Your Project</div>
+  </div>
+
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="managed-it.html"><div class="other-svc-icon">🖥️</div><p>Managed IT</p></a>
+      <a class="other-svc" href="ict-consulting.html"><div class="other-svc-icon">💡</div><p>ICT Consulting</p></a>
+      <a class="other-svc" href="hardware-software.html"><div class="other-svc-icon">⚙️</div><p>Hardware &amp; Software</p></a>
+      <a class="other-svc" href="resource-outsourcing.html"><div class="other-svc-icon">👥</div><p>Resource Outsourcing</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="resource-outsourcing.html">Resource Outsourcing</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Software Development</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Discuss Your Project</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Tell us what you need and we'll come back with a scope and approach within 48 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Project Type</label>
+          <select class="form-input">
+            <option value="">Select type…</option>
+            <option>Custom Enterprise Application</option>
+            <option>Web Application</option>
+            <option>Mobile Application</option>
+            <option>API Integration</option>
+            <option>Cloud-Native Platform</option>
+            <option>Legacy Modernisation</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Describe your project</label><textarea rows="3" placeholder="What are you trying to build? What problem does it solve? Any existing systems to integrate with?" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">Response within <strong>48 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your project enquiry has been received. We'll be in touch within <strong>48 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
