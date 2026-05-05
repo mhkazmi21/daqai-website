@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resource Outsourcing — DAQAI</title>
+<meta name="description" content="DAQAI Resource Outsourcing — access specialist IT talent on flexible engagement models. Cybersecurity engineers, infrastructure specialists, developers, and project managers for Defence, Government, and Healthcare organisations in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* Role cards */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .role-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 30px 26px;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+  }
+  .role-card:hover {
+    border-color: rgba(37,99,176,.3);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .role-icon { font-size: 30px; margin-bottom: 14px; }
+  .role-card h4 { font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+  .role-card p  { font-size: 12px; color: var(--slate2); line-height: 1.8; margin-bottom: 14px; }
+  .role-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .role-tag {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 8px;
+    background: var(--bluelt);
+    border: 1px solid rgba(37,99,176,.15);
+    border-radius: 4px;
+    color: var(--blue);
+  }
+
+  /* Engagement models */
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .model-card {
+    border-radius: 10px;
+    padding: 36px 28px;
+    border: 2px solid var(--border);
+    transition: all .25s;
+    position: relative;
+  }
+  .model-card.highlight {
+    border-color: var(--blue);
+    background: var(--bluelt);
+  }
+  .model-card.highlight::before {
+    content: 'Most Flexible';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .model-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .model-icon { font-size: 32px; margin-bottom: 14px; }
+  .model-card h3 { font-size: 18px; color: var(--navy); margin-bottom: 10px; }
+  .model-card p  { font-size: 13px; color: var(--slate2); line-height: 1.8; margin-bottom: 16px; }
+  .model-list { list-style: none; }
+  .model-list li {
+    font-size: 12px; color: var(--slate2);
+    padding: 5px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+  }
+  .model-list li:last-child { border-bottom: none; }
+  .model-list li::before { content: '✓'; color: var(--blue); font-weight: 700; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+
+  /* Cost comparison */
+  .cost-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .cost-col {
+    border-radius: 12px;
+    padding: 36px 32px;
+    border: 2px solid var(--border);
+  }
+  .cost-col.inhouse { background: var(--off); }
+  .cost-col.daqai   { background: var(--navy); border-color: var(--navy); }
+  .cost-col h3 { font-size: 18px; margin-bottom: 20px; }
+  .cost-col.daqai h3 { color: var(--white); }
+  .cost-col.inhouse h3 { color: var(--navy); }
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    font-size: 13px;
+  }
+  .cost-col.daqai .cost-item { border-bottom-color: rgba(255,255,255,.08); }
+  .cost-item:last-child { border-bottom: none; }
+  .cost-label { color: var(--slate2); }
+  .cost-col.daqai .cost-label { color: rgba(255,255,255,.6); }
+  .cost-val { font-weight: 600; color: var(--navy); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .cost-col.daqai .cost-val { color: var(--white); }
+  .cost-val.red  { color: #e74c3c; }
+  .cost-val.green { color: #2ecc71; }
+
+  /* Vetting process */
+  .vetting-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .vetting-step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .vetting-step::after {
+    content: '→';
+    position: absolute;
+    right: -12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--blue);
+    font-size: 18px;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .vetting-step:last-child::after { display: none; }
+  .vetting-num {
+    width: 40px; height: 40px;
+    background: var(--bluelt);
+    border: 2px solid rgba(37,99,176,.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 600; color: var(--blue);
+    margin: 0 auto 14px;
+  }
+  .vetting-step h4 { font-size: 13px; color: var(--navy); margin-bottom: 6px; }
+  .vetting-step p  { font-size: 11px; color: var(--slate2); line-height: 1.6; }
+
+  /* Testimonial style stat boxes */
+  .stat-boxes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .stat-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-box-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .stat-box-label {
+    font-size: 12px;
+    color: var(--slate2);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .role-grid     { grid-template-columns: 1fr; }
+    .model-grid    { grid-template-columns: 1fr; }
+    .cost-compare  { grid-template-columns: 1fr; }
+    .vetting-steps { grid-template-columns: 1fr 1fr; }
+    .vetting-step::after { display: none; }
+    .stat-boxes    { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .vetting-steps { grid-template-columns: 1fr; }
+    .stat-boxes    { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='../index.html'">
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#services" class="active">Services</a></li>
+      <li><a href="../index.html#sectors">Industries</a></li>
+      <li><a href="../insights.html">Insights</a></li>
+      <li><a href="../index.html#partners">Partners</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Discuss Your Needs</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-page-hero">
+  <div class="svc-page-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="../index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span class="current">Resource Outsourcing</span>
+    </div>
+    <div style="font-size:52px;margin-bottom:20px;">👥</div>
+    <h1 style="color:var(--white);max-width:760px;margin-bottom:20px;">Resource Outsourcing</h1>
+    <p style="color:rgba(255,255,255,.7);font-size:17px;max-width:640px;line-height:1.85;">
+      Access pre-vetted, specialist IT talent integrated seamlessly into your teams —
+      on flexible engagement models that reduce overhead, eliminate recruitment delays,
+      and deliver the expertise your organisation needs, exactly when you need it.
+    </p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <div class="btn btn-blue" onclick="openModal()">Discuss Your Requirements</div>
+      <a class="btn btn-white" href="#roles">View Available Roles</a>
+    </div>
+    <!-- Key differentiators -->
+    <div style="display:flex;gap:20px;margin-top:40px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Pre-vetted specialists only</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Deployed within days</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Flexible engagement models</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="color:#2ecc71;font-size:14px;">✓</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">Full HR management included</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="background:var(--navy2);padding:36px 48px;">
+  <div style="max-width:1240px;margin:0 auto;">
+    <div class="stat-boxes" style="margin-top:0;">
+      <div class="stat-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);">
+        <div class="stat-box-num" style="color:var(--blue);">Days</div>
+        <div class="stat-box-label" style="color:rgba(255,255,255,.5);">Average time to deploy a vetted specialist</div>
+      </div>
+      <div class="stat-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);">
+        <div class="stat-box-num" style="color:var(--blue);">10+</div>
+        <div class="stat-box-label" style="color:rgba(255,255,255,.5);">Specialist IT disciplines available</div>
+      </div>
+      <div class="stat-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);">
+        <div class="stat-box-num" style="color:var(--blue);">0</div>
+        <div class="stat-box-label" style="color:rgba(255,255,255,.5);">Recruitment overhead — we handle everything</div>
+      </div>
+      <div class="stat-box" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);">
+        <div class="stat-box-num" style="color:var(--blue);">3</div>
+        <div class="stat-box-label" style="color:rgba(255,255,255,.5);">Flexible engagement models to choose from</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVAILABLE ROLES -->
+<div id="roles" class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Available Specialists</div>
+      <h2>IT Roles We Place</h2>
+      <p class="lead">From frontline support through to senior architects and security specialists — we maintain a pipeline of pre-vetted IT professionals across all disciplines.</p>
+    </div>
+    <div class="role-grid">
+
+      <div class="role-card">
+        <div class="role-icon">🔐</div>
+        <h4>Cybersecurity Specialists</h4>
+        <p>Certified security professionals for SOC operations, penetration testing, incident response, compliance management, and security architecture roles.</p>
+        <div class="role-tags">
+          <span class="role-tag">SOC Analyst (L1/L2/L3)</span>
+          <span class="role-tag">Penetration Tester</span>
+          <span class="role-tag">Security Architect</span>
+          <span class="role-tag">CISO Advisory</span>
+          <span class="role-tag">Compliance Specialist</span>
+          <span class="role-tag">IR Engineer</span>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🖧</div>
+        <h4>Network &amp; Infrastructure Engineers</h4>
+        <p>Experienced engineers for network design, server management, data centre operations, and cloud infrastructure — from junior support to senior architects.</p>
+        <div class="role-tags">
+          <span class="role-tag">Network Engineer</span>
+          <span class="role-tag">Systems Administrator</span>
+          <span class="role-tag">Infrastructure Architect</span>
+          <span class="role-tag">Data Centre Engineer</span>
+          <span class="role-tag">Cloud Engineer</span>
+          <span class="role-tag">NOC Engineer</span>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">💻</div>
+        <h4>Software Developers</h4>
+        <p>Full-stack, backend, frontend, and mobile developers available for product builds, integrations, and ongoing development programmes.</p>
+        <div class="role-tags">
+          <span class="role-tag">Full-Stack Developer</span>
+          <span class="role-tag">Backend Engineer</span>
+          <span class="role-tag">Frontend Developer</span>
+          <span class="role-tag">Mobile Developer</span>
+          <span class="role-tag">DevOps Engineer</span>
+          <span class="role-tag">QA Engineer</span>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">📊</div>
+        <h4>Project Managers &amp; Business Analysts</h4>
+        <p>IT project leadership and business analysis professionals to drive complex programmes, manage stakeholders, and ensure delivery stays on track.</p>
+        <div class="role-tags">
+          <span class="role-tag">IT Project Manager</span>
+          <span class="role-tag">Programme Manager</span>
+          <span class="role-tag">Business Analyst</span>
+          <span class="role-tag">Scrum Master</span>
+          <span class="role-tag">Technical Lead</span>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🗄️</div>
+        <h4>Database &amp; Data Engineers</h4>
+        <p>Database administrators, data engineers, and analytics specialists for managing, optimising, and extracting value from your organisation's data assets.</p>
+        <div class="role-tags">
+          <span class="role-tag">Database Administrator</span>
+          <span class="role-tag">Data Engineer</span>
+          <span class="role-tag">BI Developer</span>
+          <span class="role-tag">Data Analyst</span>
+          <span class="role-tag">ETL Developer</span>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">📞</div>
+        <h4>IT Support &amp; Helpdesk</h4>
+        <p>Experienced helpdesk and desktop support professionals to supplement your internal IT team — from L1 triage through to L3 escalation engineers.</p>
+        <div class="role-tags">
+          <span class="role-tag">L1 Helpdesk Support</span>
+          <span class="role-tag">L2 Technical Support</span>
+          <span class="role-tag">L3 Escalation Engineer</span>
+          <span class="role-tag">Desktop Support</span>
+          <span class="role-tag">IT Coordinator</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ENGAGEMENT MODELS -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">How We Engage</div>
+      <h2>Flexible Engagement Models</h2>
+      <p class="lead" style="margin:16px auto 0;max-width:540px;">Choose the model that fits your need — scale up or down at any time without penalties or re-tendering.</p>
+    </div>
+    <div class="model-grid">
+
+      <div class="model-card">
+        <div class="model-icon">🔌</div>
+        <h3>Staff Augmentation</h3>
+        <p>Individual specialists embedded directly into your existing team — working under your direction, your processes, and your tools. Ideal for filling specific skill gaps or covering peak periods.</p>
+        <ul class="model-list">
+          <li>One or more specialists placed with your team</li>
+          <li>Works under your management &amp; processes</li>
+          <li>Scales up or down monthly</li>
+          <li>Minimum 1-month engagement</li>
+          <li>DAQAI handles HR, payroll &amp; compliance</li>
+        </ul>
+        <div class="btn btn-outline btn-sm" style="margin-top:20px;width:100%;justify-content:center;" onclick="openModal()">Enquire</div>
+      </div>
+
+      <div class="model-card highlight">
+        <div class="model-icon">🏗️</div>
+        <h3>Dedicated Team</h3>
+        <p>A fully managed team of specialists assigned exclusively to your organisation — with defined roles, KPIs, and reporting structures. Ideal for ongoing IT operations or large programmes.</p>
+        <ul class="model-list">
+          <li>2–20+ specialists across defined roles</li>
+          <li>Dedicated team lead &amp; reporting structure</li>
+          <li>Monthly KPI reporting to your leadership</li>
+          <li>Seamlessly scales with your requirements</li>
+          <li>DAQAI manages all HR, performance &amp; admin</li>
+        </ul>
+        <div class="btn btn-blue btn-sm" style="margin-top:20px;width:100%;justify-content:center;" onclick="openModal()">Enquire</div>
+      </div>
+
+      <div class="model-card">
+        <div class="model-icon">🎯</div>
+        <h3>Project-Based</h3>
+        <p>A specialist team assembled for a specific project — with defined scope, deliverables, and timeline. Ideal for one-off implementations, migrations, or development projects.</p>
+        <ul class="model-list">
+          <li>Team assembled for defined project scope</li>
+          <li>Fixed deliverables &amp; success criteria</li>
+          <li>DAQAI manages project delivery end-to-end</li>
+          <li>Clear milestones &amp; sign-off process</li>
+          <li>No ongoing commitment after project close</li>
+        </ul>
+        <div class="btn btn-outline btn-sm" style="margin-top:20px;width:100%;justify-content:center;" onclick="openModal()">Enquire</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- VETTING PROCESS -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Quality Assurance</div>
+      <h2>How We Vet Our Specialists</h2>
+      <p class="lead" style="margin:16px auto 0;max-width:560px;">Every professional we place has passed our four-stage vetting process. We only provide talent we would trust in our own operations.</p>
+    </div>
+    <div class="vetting-steps">
+      <div class="vetting-step">
+        <div class="vetting-num">01</div>
+        <h4>Technical Assessment</h4>
+        <p>Role-specific technical tests and practical assessments evaluated by our senior engineers.</p>
+      </div>
+      <div class="vetting-step">
+        <div class="vetting-num">02</div>
+        <h4>Experience Verification</h4>
+        <p>CV verification, certification checks, and portfolio review to confirm claimed experience.</p>
+      </div>
+      <div class="vetting-step">
+        <div class="vetting-num">03</div>
+        <h4>Reference Checks</h4>
+        <p>Direct reference checks with previous employers covering technical ability and work ethic.</p>
+      </div>
+      <div class="vetting-step">
+        <div class="vetting-num">04</div>
+        <h4>Background Screening</h4>
+        <p>Background checks appropriate to the role and security clearance level required.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COST COMPARISON -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="section-header split">
+      <div>
+        <div class="eyebrow">The Financial Case</div>
+        <h2>In-House Hiring vs<br/>DAQAI Outsourcing</h2>
+      </div>
+      <p class="lead" style="margin-top:0;max-width:380px;">The true cost of hiring in-house is significantly higher than the salary. Outsourcing through DAQAI eliminates most of that overhead.</p>
+    </div>
+    <div class="cost-compare">
+      <div class="cost-col inhouse">
+        <h3>🏢 In-House Hiring</h3>
+        <div class="cost-item"><span class="cost-label">Base Salary</span><span class="cost-val red">High</span></div>
+        <div class="cost-item"><span class="cost-label">Recruitment / Headhunter Fees</span><span class="cost-val red">15–25% of salary</span></div>
+        <div class="cost-item"><span class="cost-label">EOBI &amp; Benefits</span><span class="cost-val red">Additional</span></div>
+        <div class="cost-item"><span class="cost-label">Training &amp; Certifications</span><span class="cost-val red">Ongoing cost</span></div>
+        <div class="cost-item"><span class="cost-label">HR Management Overhead</span><span class="cost-val red">Significant</span></div>
+        <div class="cost-item"><span class="cost-label">Notice Period / Exit Risk</span><span class="cost-val red">High</span></div>
+        <div class="cost-item"><span class="cost-label">Time to Deploy</span><span class="cost-val red">3–6 months</span></div>
+        <div class="cost-item"><span class="cost-label">Scalability</span><span class="cost-val red">Difficult</span></div>
+      </div>
+      <div class="cost-col daqai">
+        <h3>✅ DAQAI Outsourcing</h3>
+        <div class="cost-item"><span class="cost-label">Single Monthly Fee</span><span class="cost-val green">Predictable</span></div>
+        <div class="cost-item"><span class="cost-label">Recruitment Fees</span><span class="cost-val green">None — included</span></div>
+        <div class="cost-item"><span class="cost-label">Benefits &amp; Payroll</span><span class="cost-val green">None — DAQAI handles</span></div>
+        <div class="cost-item"><span class="cost-label">Training &amp; Certifications</span><span class="cost-val green">None — pre-certified</span></div>
+        <div class="cost-item"><span class="cost-label">HR Management</span><span class="cost-val green">None — DAQAI handles</span></div>
+        <div class="cost-item"><span class="cost-label">Notice Period / Exit Risk</span><span class="cost-val green">Minimal</span></div>
+        <div class="cost-item"><span class="cost-label">Time to Deploy</span><span class="cost-val green">Days, not months</span></div>
+        <div class="cost-item"><span class="cost-label">Scalability</span><span class="cost-val green">On-demand</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Sector Experience</div>
+      <h2>Who We Place Into</h2>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-icon">🎖️</div>
+        <h3>Defence &amp; National Security</h3>
+        <p>Security-cleared IT professionals for defence IT environments — with experience in classified networks, secure communications, and mission-critical systems operations.</p>
+        <div class="sector-tags"><span class="stag">Security Cleared</span><span class="stag">Classified Networks</span><span class="stag">Mission-Critical IT</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏛️</div>
+        <h3>Government &amp; Public Sector</h3>
+        <p>IT professionals experienced in government procurement frameworks, public sector compliance requirements, and citizen-facing digital service delivery.</p>
+        <div class="sector-tags"><span class="stag">GRC Compliance</span><span class="stag">E-Government</span><span class="stag">Legacy Systems</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏥</div>
+        <h3>Healthcare</h3>
+        <p>Healthcare IT specialists familiar with clinical environments, EHR systems, HIPAA requirements, and the unique sensitivity of working in patient-facing technology contexts.</p>
+        <div class="sector-tags"><span class="stag">EHR Systems</span><span class="stag">HIPAA Compliance</span><span class="stag">Clinical IT</span></div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏢</div>
+        <h3>Enterprise &amp; Commercial</h3>
+        <p>IT talent for private sector organisations across all industries — from rapid staff augmentation during transformation programmes to dedicated teams for ongoing IT operations.</p>
+        <div class="sector-tags"><span class="stag">Staff Augmentation</span><span class="stag">IT Transformation</span><span class="stag">Managed Teams</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="svc-cta-strip">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="eyebrow light" style="justify-content:center;">Get Started</div>
+    <h2>Need specialist IT talent fast?</h2>
+    <p>Tell us what role you need, what skills matter most, and when you need them — and we'll match you with vetted candidates within days.</p>
+    <div class="btn btn-blue" onclick="openModal()">Discuss Your Requirements</div>
+  </div>
+
+  <div style="margin-top:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Other Services</div>
+    <div class="other-svc-grid">
+      <a class="other-svc" href="cybersecurity.html"><div class="other-svc-icon">🛡️</div><p>Cybersecurity</p></a>
+      <a class="other-svc" href="managed-it.html"><div class="other-svc-icon">🖥️</div><p>Managed IT</p></a>
+      <a class="other-svc" href="ict-consulting.html"><div class="other-svc-icon">💡</div><p>ICT Consulting</p></a>
+      <a class="other-svc" href="hardware-software.html"><div class="other-svc-icon">⚙️</div><p>Hardware &amp; Software</p></a>
+      <a class="other-svc" href="software-development.html"><div class="other-svc-icon">🔧</div><p>Software Development</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">DAQAI</div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="managed-it.html">Managed IT Services</a></li>
+        <li><a href="ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="resource-outsourcing.html">Resource Outsourcing</a></li>
+        <li><a href="software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="../about.html">About DAQAI</a></li>
+        <li><a href="../insights.html">Insights</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Resource Outsourcing</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Tell Us What You Need</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">We'll match you with vetted specialists and come back within 48 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label class="form-label">Role / Discipline Needed</label>
+          <select class="form-input">
+            <option value="">Select role type…</option>
+            <option>Cybersecurity Specialist</option>
+            <option>Network / Infrastructure Engineer</option>
+            <option>Software Developer</option>
+            <option>Project Manager / BA</option>
+            <option>Database / Data Engineer</option>
+            <option>IT Support / Helpdesk</option>
+            <option>Multiple Roles</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Engagement Model</label>
+          <select class="form-input">
+            <option value="">Select model…</option>
+            <option>Staff Augmentation</option>
+            <option>Dedicated Team</option>
+            <option>Project-Based</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Requirement Details</label><textarea rows="3" placeholder="Number of resources needed, duration, key skills, start date…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">Response within <strong>48 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your requirement has been received. We'll be in touch with matched candidates within <strong>48 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../shared.js"></script>
+</body>
+</html>
