@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DAQAI — Enterprise IT & Cybersecurity Solutions</title>
+<meta name="description" content="DAQAI Private Limited — Enterprise cybersecurity, IT infrastructure, and digital transformation solutions for Defence, Government, and Healthcare sectors in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='index.html'">
+      <img src="logo.png" alt="DAQAI Logo" style="height:42px;width:auto;display:block;"/>
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#sectors">Industries</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <h1>Securing &amp;<br/><em>Transforming</em><br/>Enterprise IT</h1>
+      <p class="hero-sub">Cybersecurity, IT infrastructure, and digital transformation solutions purpose-built for Defence, Government, and Healthcare sectors.</p>
+      <div class="hero-actions">
+        <div class="btn btn-navy" onclick="openModal()">Request Consultation</div>
+        <a class="btn btn-outline" href="#services">Explore Services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card-label">DAQAI AT A GLANCE</div>
+      <div class="kpi-row">
+        <div class="kpi"><div class="kpi-num">10+</div><div class="kpi-label">Service Verticals</div></div>
+        <div class="kpi blue"><div class="kpi-num">24/7</div><div class="kpi-label">Managed Support</div></div>
+        <div class="kpi blue"><div class="kpi-num">3</div><div class="kpi-label">Critical Sectors</div></div>
+        <div class="kpi"><div class="kpi-num">ISO</div><div class="kpi-label">Compliant Solutions</div></div>
+      </div>
+      <div class="hero-card-label" style="margin-top:4px">CERTIFIED PARTNERS</div>
+      <div class="partner-strip">
+        <span class="ps-badge">Dell Technologies</span>
+        <span class="ps-badge">Lenovo 360</span>
+        <span class="ps-badge">NexaVM</span>
+        <span class="ps-badge">SGBox</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="hero-stats">
+  <div class="hstat"><div class="hstat-num">Defence</div><div class="hstat-label">National Security</div></div>
+  <div class="hstat"><div class="hstat-num">Gov</div><div class="hstat-label">Public Sector</div></div>
+  <div class="hstat"><div class="hstat-num">Health</div><div class="hstat-label">Healthcare IT</div></div>
+  <div class="hstat"><div class="hstat-num">24/7</div><div class="hstat-label">SOC Monitoring</div></div>
+  <div class="hstat"><div class="hstat-num">ISO</div><div class="hstat-label">27001 Aligned</div></div>
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="section section-off">
+  <div class="section-inner">
+    <div class="section-header split">
+      <div><div class="eyebrow">What We Do</div><h2>Core Services</h2></div>
+      <p class="lead" style="margin-top:0;font-size:14px;max-width:380px">End-to-end IT solutions engineered for security, resilience, and operational excellence.</p>
+    </div>
+    <div class="svc-grid">
+      <a class="svc-card" href="services/cybersecurity.html">
+        <div class="svc-icon">🛡️</div><h3>Cybersecurity</h3>
+        <p>Multi-layered protection against evolving threats with enterprise-grade operations and monitoring.</p>
+        <ul class="svc-list">
+          <li>Vulnerability Assessment &amp; Pen Testing</li>
+          <li>Network Security &amp; Firewall Management</li>
+          <li>SIEM / SOAR / XDR / NDR</li>
+          <li>Incident Response &amp; Disaster Recovery</li>
+          <li>ISO 27001 / GDPR Compliance</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/managed-it.html">
+        <div class="svc-icon">🖥️</div><h3>Managed IT Services</h3>
+        <p>Proactive monitoring and management keeping your infrastructure running at peak performance.</p>
+        <ul class="svc-list">
+          <li>24/7 System Monitoring &amp; Support</li>
+          <li>Server &amp; Network Management</li>
+          <li>Data Backup &amp; Recovery</li>
+          <li>Security Management &amp; Compliance</li>
+          <li>System Upgrades &amp; Patch Management</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/ict-consulting.html">
+        <div class="svc-icon">💡</div><h3>ICT Consulting</h3>
+        <p>Strategic technology guidance aligning your IT ecosystem with your business objectives.</p>
+        <ul class="svc-list">
+          <li>Digital Transformation Strategy</li>
+          <li>IT Infrastructure Assessment &amp; Design</li>
+          <li>Cloud Computing Advisory</li>
+          <li>Network Optimisation</li>
+          <li>Technology Roadmap Development</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/hardware-software.html">
+        <div class="svc-icon">⚙️</div><h3>Hardware &amp; Software</h3>
+        <p>Authorised reseller of enterprise solutions from world-leading technology vendors.</p>
+        <ul class="svc-list">
+          <li>Servers, Storage &amp; Networking</li>
+          <li>PCs, Laptops &amp; Peripherals</li>
+          <li>ERP &amp; CRM Systems</li>
+          <li>Cloud-Based Software Licensing</li>
+          <li>Vendor-Certified Equipment</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/intelligence-solutions.html">
+        <div class="svc-icon">🔭</div><h3>Intelligence Solutions</h3>
+        <p>Specialised intelligence, surveillance, and electronic warfare systems for Defence and Law Enforcement organisations.</p>
+        <ul class="svc-list">
+          <li>Communication Interception Systems</li>
+          <li>Jamming &amp; Anti-Drone Solutions</li>
+          <li>ELINT &amp; C4ISR Platforms</li>
+          <li>Unmanned Aerial Systems (UAS)</li>
+          <li>Communication Security</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/resource-outsourcing.html">
+        <div class="svc-icon">👥</div><h3>Resource Outsourcing</h3>
+        <p>Access specialist IT talent integrated seamlessly into your teams and projects.</p>
+        <ul class="svc-list">
+          <li>Highly Skilled IT Professionals</li>
+          <li>Flexible Hiring Models</li>
+          <li>Reduced Overhead Costs</li>
+          <li>End-to-End Team Management</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+      <a class="svc-card" href="services/software-development.html">
+        <div class="svc-icon">🔧</div><h3>Software Development</h3>
+        <p>Bespoke software, web, and mobile solutions built on modern, secure architectures.</p>
+        <ul class="svc-list">
+          <li>Custom Enterprise Solutions</li>
+          <li>Web &amp; Mobile App Development</li>
+          <li>API Integration &amp; Development</li>
+          <li>Cloud-Based Applications</li>
+          <li>Legacy System Support</li>
+        </ul>
+        <div class="svc-link">Learn More →</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<div id="sectors" class="section section-white">
+  <div class="section-inner">
+    <div class="section-header"><div class="eyebrow">Who We Serve</div><h2>Critical Sectors</h2><p class="lead">Purpose-built solutions for the most demanding, regulated industries.</p></div>
+    <div class="sectors-grid">
+      <div class="sector-card"><div class="sector-icon">🎖️</div><h3>Defence &amp; National Security</h3><p>Securing mission-critical infrastructure and sourcing specialist defence-grade equipment with full compliance and operational integrity.</p><div class="sector-tags"><span class="stag">Classified Networks</span><span class="stag">Security Equipment</span><span class="stag">Threat Intelligence</span><span class="stag">Op Continuity</span></div></div>
+      <div class="sector-card"><div class="sector-icon">🏛️</div><h3>Government &amp; Public Sector</h3><p>Modernising public sector IT with secure, scalable infrastructure and digital transformation strategies aligned to national standards.</p><div class="sector-tags"><span class="stag">GRC Compliance</span><span class="stag">Digital Services</span><span class="stag">Data Sovereignty</span><span class="stag">SOC Operations</span></div></div>
+      <div class="sector-card"><div class="sector-icon">🏥</div><h3>Healthcare</h3><p>Protecting sensitive patient data and enabling seamless healthcare operations through secure, HIPAA-aligned IT solutions.</p><div class="sector-tags"><span class="stag">HIPAA Compliance</span><span class="stag">EHR Security</span><span class="stag">Telemedicine Infra</span><span class="stag">Data Encryption</span></div></div>
+      <div class="sector-card"><div class="sector-icon">🏢</div><h3>Enterprise &amp; Commercial</h3><p>Comprehensive IT transformation from infrastructure modernisation to full managed security services for private organisations.</p><div class="sector-tags"><span class="stag">ERP / CRM</span><span class="stag">Cloud Migration</span><span class="stag">IT Outsourcing</span><span class="stag">Custom Dev</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<div id="partners" class="section section-off">
+  <div class="section-inner">
+    <div class="section-header"><div class="eyebrow">Technology Ecosystem</div><h2>Trusted Partners</h2><p class="lead">Authorised by industry-leading global vendors, delivering certified solutions with full vendor backing.</p></div>
+    <div class="partners-grid">
+      <div class="partner-card"><span class="p-name">Lenovo</span><span class="p-tier">360 Authorized Partner</span><p>Intelligent Devices &amp; Infrastructure Solutions in Pakistan</p></div>
+      <div class="partner-card"><span class="p-name">Dell</span><span class="p-tier">Technologies Authorized Partner</span><p>Enterprise Hardware &amp; Infrastructure Solutions</p></div>
+      <div class="partner-card"><span class="p-name">NexaVM</span><span class="p-tier">Enterprise Reseller</span><p>Virtualisation, HCI &amp; Cloud Infrastructure Platforms</p></div>
+      <div class="partner-card"><span class="p-name">SGBox</span><span class="p-tier">Security Partner</span><p>SIEM &amp; SOAR Advanced Bundle — Next-Gen Security</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY DAQAI -->
+<div id="why" class="section section-white">
+  <div class="section-inner">
+    <div class="section-header"><div class="eyebrow">Why DAQAI</div><h2>Our Strengths</h2></div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🎯</div><h3>Client-Centric Approach</h3><p>Long-term partnerships built on deeply understanding each client's unique challenges and delivering precisely tailored solutions.</p></div>
+      <div class="why-card"><div class="why-icon">💎</div><h3>Innovation &amp; Excellence</h3><p>Continuously adopting the latest technologies and best practices, setting the benchmark for quality across every engagement.</p></div>
+      <div class="why-card"><div class="why-icon">✅</div><h3>Certified &amp; Compliant</h3><p>Authorised by Dell Technologies and Lenovo 360. Solutions aligned to ISO 27001, GDPR, HIPAA, and NIST frameworks.</p></div>
+      <div class="why-card"><div class="why-icon">👩‍💻</div><h3>Skilled Workforce</h3><p>Seasoned professionals with deep expertise across cybersecurity, infrastructure, software development, and engineering.</p></div>
+      <div class="why-card"><div class="why-icon">⚡</div><h3>Operational Efficiency</h3><p>Streamlined delivery ensures timely, cost-effective outcomes from procurement and deployment through to managed services.</p></div>
+      <div class="why-card"><div class="why-icon">🏆</div><h3>Sector Expertise</h3><p>Purpose-built experience in Defence, Government, and Healthcare — the most demanding, regulated IT environments.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="eyebrow">Get In Touch</div>
+    <h2>Let's Talk</h2>
+    <p>Ready to secure and transform your organisation? Our expert team is standing by.</p>
+    <div class="btn btn-blue" onclick="openModal()">Request a Consultation</div>
+  </div>
+  <div class="contact-grid">
+    <div class="cdet"><div class="cdet-label">Email</div><div class="cdet-val">contact@daqai.org</div></div>
+    <div class="cdet"><div class="cdet-label">Phone</div><div class="cdet-val">+92 321 5487114</div></div>
+    <div class="cdet"><div class="cdet-label">Headquarters</div><div class="cdet-val">Apt 201, Plaza 15, Rafi Commercial, Bahria Town, Islamabad</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <img src="logo.png" alt="DAQAI" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.85;margin-bottom:8px;display:block;"/>
+        DAQAI
+      </div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="services/cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="services/managed-it.html">Managed IT Services</a></li>
+        <li><a href="services/ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="services/hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="services/intelligence-solutions.html">Intelligence Solutions</a></li>
+        <li><a href="services/resource-outsourcing.html">Resource Outsourcing</a></li>
+        <li><a href="services/software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Industries</div>
+      <ul class="fc-list">
+        <li><a href="#sectors">Defence &amp; Security</a></li>
+        <li><a href="#sectors">Government</a></li>
+        <li><a href="#sectors">Healthcare</a></li>
+        <li><a href="#sectors">Enterprise</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="about.html">About DAQAI</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px">Get In Touch</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px">Request a Consultation</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Fill in your details and our team will be in touch within 24 hours.</p>
+  </div>
+  <div style="padding:32px 36px">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div><label class="form-label">Service Interest</label>
+          <select class="form-input">
+            <option value="">Select a service…</option>
+            <option>Cybersecurity</option>
+            <option>Managed IT Services</option>
+            <option>ICT Consulting</option>
+            <option>Hardware &amp; Software</option>
+            <option>Software Development</option>
+            <option>Resource Outsourcing</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px"><label class="form-label">Message</label><textarea rows="3" placeholder="Tell us about your requirements…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2)">We'll respond within <strong>24 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0">
+      <div style="font-size:48px;margin-bottom:16px">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px">Thank you!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your request has been sent. We'll be in touch within 24 hours.</p>
+      <div style="margin-bottom:16px;font-size:13px;color:var(--navy);">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:20px;font-size:13px;color:var(--navy);">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+</body>
+</html>

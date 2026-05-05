@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About DAQAI — Enterprise IT & Cybersecurity Solutions</title>
+<meta name="description" content="About DAQAI Private Limited — our mission, vision, values, and the team behind Pakistan's leading enterprise IT and cybersecurity solutions provider for Defence, Government, and Healthcare."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* ── About-page specific styles ── */
+
+  /* Hero */
+  .about-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+    padding: 100px 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+  .about-hero::after {
+    content: 'DAQAI';
+    position: absolute;
+    right: -20px; bottom: -40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    font-weight: 700;
+    color: rgba(255,255,255,.04);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .about-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .stat-card-num span { color: var(--blue); }
+  .stat-card-label { font-size: 13px; color: var(--slate2); line-height: 1.5; }
+  .stat-card.blue { background: var(--bluelt); border-color: rgba(37,99,176,.18); }
+  .stat-card.blue .stat-card-num { color: var(--blue); }
+
+  /* Story section */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .story-content p {
+    font-size: 15px;
+    color: var(--slate2);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+  .story-panel {
+    background: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 36px;
+  }
+  .hq-badge {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .hq-badge .city { font-size: 16px; color: var(--white); font-weight: 600; margin-bottom: 4px; }
+  .hq-badge .addr { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.6; }
+
+  /* Mission / Vision */
+  .mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .mv-card {
+    border-radius: 12px;
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mv-card.mission {
+    background: var(--white);
+    border: 1px solid var(--border);
+  }
+  .mv-card.vision {
+    background: var(--navy);
+  }
+  .mv-card .bg-letter {
+    position: absolute;
+    top: -20px; right: -10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 700;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .mv-card.mission .bg-letter { color: rgba(37,99,176,.05); }
+  .mv-card.vision  .bg-letter { color: rgba(255,255,255,.04); }
+  .mv-card-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+  .mv-card.mission .mv-card-icon { background: var(--bluelt); border: 1px solid rgba(37,99,176,.15); }
+  .mv-card.vision  .mv-card-icon { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1); }
+  .mv-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .mv-card.mission h3 { color: var(--navy); }
+  .mv-card.vision  h3 { color: var(--white); }
+  .mv-card p {
+    font-size: 14px;
+    line-height: 1.9;
+    position: relative; z-index: 1;
+  }
+  .mv-card.mission p { color: var(--slate2); }
+  .mv-card.vision  p { color: rgba(255,255,255,.6); }
+
+  /* Values */
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .value-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .value-item:last-child { border-bottom: none; }
+  .value-num {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 600; color: var(--white);
+    flex-shrink: 0;
+  }
+  .value-item h4 { font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+  .value-item p  { font-size: 13px; color: var(--slate2); line-height: 1.85; }
+
+  /* Vendor strip */
+  .vendor-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    max-width: 900px;
+    margin: 48px auto 0;
+  }
+  .vendor-item {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 32px 24px;
+    text-align: center;
+    transition: background .2s;
+  }
+  .vendor-item:hover { background: rgba(255,255,255,.12); }
+  .vendor-item .v-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .vendor-item .v-tier { font-size: 9px; color: var(--slate3); letter-spacing: 1.5px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+
+  /* Differentiators */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .diff-card {
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .diff-card:hover { border-color: rgba(37,99,176,.3); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .diff-card-icon { font-size: 32px; margin-bottom: 18px; }
+  .diff-card h3 { font-size: 17px; color: var(--navy); margin-bottom: 10px; }
+  .diff-card p  { font-size: 13px; color: var(--slate2); line-height: 1.85; }
+
+  /* CTA */
+  .about-cta {
+    background: var(--off);
+    padding: 88px 48px;
+    text-align: center;
+  }
+  .about-cta h2 { margin-bottom: 20px; }
+  .about-cta p  { color: var(--slate2); font-size: 15px; line-height: 1.85; max-width: 560px; margin: 0 auto 36px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .contact-details { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; font-size: 13px; color: var(--slate2); }
+  .contact-details span { display: flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 900px) {
+    .about-hero  { padding: 60px 24px 48px; }
+    .stats-grid  { grid-template-columns: 1fr 1fr; }
+    .story-grid  { grid-template-columns: 1fr; gap: 40px; }
+    .mv-grid     { grid-template-columns: 1fr; }
+    .mv-card     { padding: 36px 28px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .vendor-strip{ grid-template-columns: 1fr 1fr; }
+    .diff-grid   { grid-template-columns: 1fr; }
+    .about-cta   { padding: 60px 24px; }
+  }
+  @media (max-width: 560px) {
+    .stats-grid  { grid-template-columns: 1fr; }
+    .vendor-strip{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="window.location='index.html'">
+      <img src="logo.png" alt="DAQAI Logo" style="height:42px;width:auto;display:block;"/>
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#sectors">Industries</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="index.html#partners">Partners</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="eyebrow" style="color:var(--slate3);">Who We Are</div>
+    <h1 style="color:var(--white);max-width:720px;margin-bottom:24px;font-size:clamp(40px,5vw,68px);">
+      Built on Expertise.<br/>Driven by Purpose.
+    </h1>
+    <p style="color:rgba(255,255,255,.65);font-size:18px;max-width:580px;line-height:1.85;font-weight:300;">
+      DAQAI Private Limited is a forward-thinking enterprise IT solutions company dedicated to securing,
+      modernising, and transforming the organisations that matter most — in Defence, Government, and Healthcare.
+    </p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-num">10<span>+</span></div>
+        <div class="stat-card-label">Service Verticals across IT, security, and intelligence</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-card-num">3</div>
+        <div class="stat-card-label">Critical Sectors — Defence, Government, Healthcare</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-card-num">24/7</div>
+        <div class="stat-card-label">Managed support and SOC monitoring capability</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num">ISO</div>
+        <div class="stat-card-label">27001, GDPR, HIPAA, and NIST aligned solutions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OUR STORY -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-content">
+        <div class="eyebrow">Our Story</div>
+        <h2 style="margin-bottom:24px;">Technology That <span style="color:var(--blue);">Actually Works</span> — In the Real World</h2>
+        <p>DAQAI was founded on a straightforward conviction: that organisations operating in the most demanding, high-stakes environments deserve IT solutions built to the same standard as the missions they run. Not off-the-shelf. Not generic. Purpose-built, rigorously delivered, and backed by genuine expertise.</p>
+        <p>We work at the intersection of cybersecurity, infrastructure, and digital transformation — three disciplines that are increasingly inseparable in a world where a single vulnerability can disrupt an entire operation, and where the pace of technological change outstrips the capacity of most organisations to keep up on their own.</p>
+        <p>DAQAI bridges that gap. We combine deep technical expertise with a client-centric operating model — meaning we start with your problems, not our product catalogue. And we stay engaged until those problems are genuinely solved.</p>
+      </div>
+      <div class="story-panel">
+        <div class="eyebrow">At a Glance</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px 18px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--navy);">10<span style="color:var(--blue);">+</span></div>
+            <div style="font-size:11px;color:var(--slate2);margin-top:4px;">Service Verticals</div>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px 18px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--navy);">3</div>
+            <div style="font-size:11px;color:var(--slate2);margin-top:4px;">Critical Sectors</div>
+          </div>
+          <div style="background:var(--bluelt);border:1px solid rgba(37,99,176,.15);border-radius:8px;padding:20px 18px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--blue);">24/7</div>
+            <div style="font-size:11px;color:var(--slate2);margin-top:4px;">Managed Support</div>
+          </div>
+          <div style="background:var(--bluelt);border:1px solid rgba(37,99,176,.15);border-radius:8px;padding:20px 18px;text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--blue);">ISO</div>
+            <div style="font-size:11px;color:var(--slate2);margin-top:4px;">27001 Aligned</div>
+          </div>
+        </div>
+        <div class="hq-badge">
+          <div class="city">Islamabad, Pakistan</div>
+          <div class="addr">Apt 201, Plaza 15, Rafi Commercial<br/>Bahria Town, Islamabad</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION & VISION -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="eyebrow" style="justify-content:center;">Purpose &amp; Direction</div>
+      <h2>What Drives <span style="color:var(--blue);">Everything We Do</span></h2>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card mission">
+        <div class="bg-letter">M</div>
+        <div class="mv-card-icon">🎯</div>
+        <div class="eyebrow">Our Mission</div>
+        <h3>Deliver solutions that exceed expectations — every time</h3>
+        <p>To deliver exceptional IT services, cybersecurity solutions, and high-quality technology supply that consistently exceeds our clients' expectations. We foster long-term partnerships by providing reliable, efficient, and secure solutions that drive business growth and operational success — not just in the short term, but for the long haul.</p>
+      </div>
+      <div class="mv-card vision">
+        <div class="bg-letter">V</div>
+        <div class="mv-card-icon">🔭</div>
+        <div class="eyebrow" style="color:var(--slate3);">Our Vision</div>
+        <h3>To be the most trusted IT partner for critical sector organisations</h3>
+        <p>To be a leading provider of innovative IT solutions and general supplies, empowering businesses to achieve excellence and resilience in a rapidly evolving digital landscape — where security is not an afterthought, but the foundation of everything we build.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT MAKES US DIFFERENT -->
+<div class="section section-white">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="eyebrow" style="justify-content:center;">Our Difference</div>
+      <h2>Why Clients Choose <span style="color:var(--blue);">DAQAI</span></h2>
+      <p style="color:var(--slate2);font-size:15px;max-width:520px;margin:16px auto 0;line-height:1.8;">We don't win clients by being the cheapest option. We win them by being the most capable, the most committed, and the most honest about what it takes to get results.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-card-icon">🔍</div>
+        <h3>We Start With Your Problem</h3>
+        <p>We don't arrive with a pre-packaged solution and retrofit it to your situation. Every engagement begins with a thorough assessment of your specific environment, risks, and objectives — then we build from there.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">🤝</div>
+        <h3>Long-Term Partnership, Not Transactions</h3>
+        <p>Our client relationships are measured in years, not projects. We invest in understanding your organisation deeply so that every piece of advice and every solution we deliver compounds over time into real strategic advantage.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">⚡</div>
+        <h3>Sector Expertise That Runs Deep</h3>
+        <p>Defence, Government, and Healthcare are not like other sectors. They operate under unique regulatory frameworks, security requirements, and operational pressures. We understand these environments — and our solutions are built to work within them.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">🛡️</div>
+        <h3>Security Is Not a Feature — It's a Foundation</h3>
+        <p>Every solution we design — whether infrastructure, software, or managed service — is architected with security as its core requirement. We don't bolt it on at the end.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">📋</div>
+        <h3>Certified. Compliant. Accountable.</h3>
+        <p>Authorised partner status with Dell Technologies, Lenovo 360, NexaVM, and SGBox. Solutions aligned to ISO 27001, GDPR, HIPAA, and NIST frameworks. Our certifications are commitments to a standard.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">💡</div>
+        <h3>Honest Advice, Even When It's Hard</h3>
+        <p>We tell clients what they need to hear, not what they want to hear. If a solution isn't right for your organisation, we'll say so — and suggest a better path. Our reputation is built on integrity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CORE VALUES -->
+<div class="section section-off">
+  <div class="section-inner">
+    <div class="values-grid">
+      <div>
+        <div class="eyebrow">Core Values</div>
+        <h2 style="margin-bottom:24px;">The Principles We Work By</h2>
+        <p style="color:var(--slate2);font-size:14px;line-height:1.9;">These aren't words on a wall. They are the operating standards that govern every decision we make — from how we design a security architecture to how we respond when something goes wrong.</p>
+      </div>
+      <div>
+        <div class="value-item">
+          <div class="value-num">01</div>
+          <div>
+            <h4>Integrity Above All</h4>
+            <p>We do what we say, say what we mean, and never overpromise. In an industry where trust is the product, our word is our most valuable asset.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">02</div>
+          <div>
+            <h4>Excellence in Execution</h4>
+            <p>Strategy is worthless without delivery. We hold ourselves to a high standard of operational rigour — because our clients operate in environments where failure is not an option.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">03</div>
+          <div>
+            <h4>Continuous Learning</h4>
+            <p>The threat landscape evolves daily. We invest heavily in keeping our team at the frontier — so our clients benefit from knowledge that's current, not outdated.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">04</div>
+          <div>
+            <h4>Client Success Is Our Success</h4>
+            <p>We measure ourselves not by deliverables completed, but by outcomes achieved. If our client's security posture improves and their operations run smoother — that is how we know we've done our job.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-num">05</div>
+          <div>
+            <h4>Responsibility to Community</h4>
+            <p>We are building something in Pakistan's technology ecosystem that we want to see more of — local expertise, international standards, and a commitment to raising the bar for what enterprise IT looks like in this region.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFIED PARTNERS -->
+<div style="background:var(--navy);padding:64px 48px;">
+  <div style="max-width:1240px;margin:0 auto;text-align:center;">
+    <div class="eyebrow" style="color:var(--slate3);justify-content:center;margin-bottom:12px;">Technology Ecosystem</div>
+    <h2 style="color:var(--white);margin-bottom:16px;">Authorised by the <span style="color:var(--blue);">World's Best</span></h2>
+    <p style="color:rgba(255,255,255,.55);font-size:15px;max-width:520px;margin:0 auto 0;line-height:1.8;">Our partner certifications represent real investment in training, compliance, and accountability to the highest vendor standards.</p>
+    <div class="vendor-strip">
+      <div class="vendor-item">
+        <div class="v-name">Lenovo</div>
+        <div class="v-tier">360 Authorized Partner</div>
+      </div>
+      <div class="vendor-item">
+        <div class="v-name">Dell</div>
+        <div class="v-tier">Technologies Authorized</div>
+      </div>
+      <div class="vendor-item">
+        <div class="v-name">NexaVM</div>
+        <div class="v-tier">Enterprise Reseller</div>
+      </div>
+      <div class="vendor-item">
+        <div class="v-name">SGBox</div>
+        <div class="v-tier">Security Partner</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="about-cta">
+  <div class="eyebrow" style="justify-content:center;">Work With Us</div>
+  <h2>Ready to work with a team that <span style="color:var(--blue);">takes your mission seriously?</span></h2>
+  <p>Whether you're looking to secure your infrastructure, modernise your IT environment, or navigate a complex technology challenge — DAQAI is ready to help. Let's start with a conversation.</p>
+  <div class="cta-actions">
+    <div class="btn btn-navy" onclick="openModal()">Request a Consultation</div>
+    <a class="btn btn-outline" href="insights.html">Read Our Insights →</a>
+  </div>
+  <div class="contact-details">
+    <span>📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></span>
+    <span>📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></span>
+    <span>🌐 <a href="https://www.daqai.org" style="color:var(--blue);">www.daqai.org</a></span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <img src="logo.png" alt="DAQAI" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.85;margin-bottom:8px;display:block;"/>
+        DAQAI
+      </div>
+      <div class="footer-tagline">Secure · Transform · Excel</div>
+      <p class="footer-desc">Enterprise IT solutions and cybersecurity services for Defence, Government and Healthcare sectors in Pakistan.</p>
+    </div>
+    <div>
+      <div class="fc-title">Services</div>
+      <ul class="fc-list">
+        <li><a href="services/cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="services/managed-it.html">Managed IT Services</a></li>
+        <li><a href="services/ict-consulting.html">ICT Consulting</a></li>
+        <li><a href="services/hardware-software.html">Hardware &amp; Software</a></li>
+        <li><a href="services/intelligence-solutions.html">Intelligence Solutions</a></li>
+        <li><a href="services/resource-outsourcing.html">Resource Outsourcing</a></li>
+        <li><a href="services/software-development.html">Software Development</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Company</div>
+      <ul class="fc-list">
+        <li><a href="about.html">About DAQAI</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">Contact</div>
+      <ul class="fc-list">
+        <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+        <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+        <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+    <div class="cbadges">
+      <span class="cbadge">Dell Technologies Authorized</span>
+      <span class="cbadge">Lenovo 360 Authorized</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Get In Touch</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Request a Consultation</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Fill in your details and our team will be in touch within 24 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Service Interest</label>
+          <select class="form-input">
+            <option value="">Select a service…</option>
+            <option>Cybersecurity</option>
+            <option>Managed IT Services</option>
+            <option>ICT Consulting</option>
+            <option>Hardware &amp; Software</option>
+            <option>Intelligence Solutions</option>
+            <option>Software Development</option>
+            <option>Resource Outsourcing</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Message</label><textarea rows="3" placeholder="Tell us about your requirements…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">We'll respond within <strong>24 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your request has been sent. We'll be in touch within <strong>24 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+</body>
+</html>

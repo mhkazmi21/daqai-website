@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Insights — DAQAI Enterprise IT & Cybersecurity</title>
+<meta name="description" content="DAQAI Insights — expert analysis, trends, and perspectives on cybersecurity, IT infrastructure, and digital transformation for Defence, Government, and Healthcare sectors in Pakistan."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* ── Insights-page styles ── */
+
+  .insights-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+    padding: 80px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .insights-hero::after {
+    content: 'INSIGHTS';
+    position: absolute;
+    right: -20px; bottom: -30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    font-weight: 700;
+    color: rgba(255,255,255,.05);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .insights-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .insights-hero h1 { color: var(--white); max-width: 600px; margin-bottom: 12px; }
+  .insights-hero p  { color: var(--slate3); font-size: 16px; max-width: 500px; line-height: 1.8; margin-bottom: 32px; }
+
+  /* Filter tabs */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .ftab {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.6);
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .5px;
+    background: none;
+  }
+  .ftab:hover, .ftab.active {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--navy);
+  }
+
+  /* Layout */
+  .insights-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 64px 48px;
+    align-items: start;
+  }
+
+  /* Featured article */
+  .featured-article {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 32px;
+    cursor: pointer;
+    transition: box-shadow .25s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .featured-article:hover { box-shadow: 0 16px 48px rgba(26,43,69,.16); }
+  .feat-thumb {
+    background: linear-gradient(135deg, var(--off2), var(--bluelt));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    min-height: 260px;
+  }
+  .feat-body {
+    padding: 40px 32px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .feat-badge {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 10px;
+    background: var(--bluelt);
+    border: 1px solid rgba(37,99,176,.15);
+    border-radius: 20px;
+    color: var(--blue);
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    width: fit-content;
+  }
+  .feat-body h2 { font-size: 22px; color: var(--navy); line-height: 1.25; }
+  .feat-body p  { font-size: 13px; color: var(--slate2); line-height: 1.8; }
+  .feat-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--slate2);
+    display: flex;
+    gap: 8px;
+  }
+
+  /* Article grid */
+  .article-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .article-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .article-card:hover {
+    border-color: rgba(37,99,176,.25);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .article-thumb {
+    height: 140px;
+    background: linear-gradient(135deg, var(--off2), var(--bluelt));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .article-body { padding: 18px; }
+  .article-badge {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 9px;
+    background: var(--bluelt);
+    border: 1px solid rgba(37,99,176,.15);
+    border-radius: 20px;
+    color: var(--blue);
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .article-card h3 { font-size: 14px; color: var(--navy); line-height: 1.3; margin-bottom: 7px; }
+  .article-card p  { font-size: 11px; color: var(--slate2); line-height: 1.7; }
+  .article-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--slate2);
+    margin-top: 10px;
+    display: flex;
+    gap: 6px;
+  }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 88px; }
+  .sw {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .sw-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+  .sw-list { list-style: none; }
+  .sw-list li { border-bottom: 1px solid var(--border); }
+  .sw-list li:last-child { border-bottom: none; }
+  .sw-list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    font-size: 12px;
+    color: var(--slate2);
+    cursor: pointer;
+    transition: color .2s;
+    text-decoration: none;
+  }
+  .sw-list li a:hover { color: var(--navy); }
+  .sw-count {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bluelt);
+    padding: 2px 7px;
+    border-radius: 10px;
+    color: var(--blue);
+  }
+  .sw-cta { background: linear-gradient(135deg, var(--navy), var(--slate)); }
+  .sw-cta .sw-title { color: var(--slate3); }
+  .sw-cta h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin: 8px 0;
+  }
+  .sw-cta p { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 16px; }
+
+  /* Single post */
+  .post-wrap { display: none; }
+  .post-wrap.active { display: block; }
+  .insights-wrap { display: block; }
+  .insights-wrap.hidden { display: none; }
+
+  .post-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+    padding: 72px 48px 48px;
+  }
+  .post-hero-inner { max-width: 860px; margin: 0 auto; }
+  .post-breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .post-breadcrumb span { cursor: pointer; transition: color .2s; }
+  .post-breadcrumb span:hover { color: var(--white); }
+  .post-breadcrumb .sep { color: rgba(255,255,255,.2); }
+  .post-badge {
+    font-size: 9px;
+    padding: 4px 12px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    margin-bottom: 16px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .post-hero h1 { color: var(--white); font-size: clamp(28px,4vw,48px); margin-bottom: 14px; }
+  .post-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,.65);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+  .post-meta-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255,255,255,.5);
+    flex-wrap: wrap;
+  }
+  .post-meta-row .sep { color: rgba(255,255,255,.2); }
+
+  .post-hero-img {
+    height: 360px;
+    background: linear-gradient(135deg, var(--off2), var(--bluelt));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 52px;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+  .post-content { font-size: 15px; line-height: 1.95; color: #3a4a5c; }
+  .post-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    margin: 40px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .post-content h3 { font-size: 19px; color: var(--navy); margin: 28px 0 10px; }
+  .post-content p  { margin-bottom: 18px; }
+  .post-content ul { margin: 0 0 18px 24px; }
+  .post-content li { margin-bottom: 6px; }
+  .post-content strong { color: var(--navy); }
+  .post-content blockquote {
+    border-left: 3px solid var(--blue);
+    padding: 16px 22px;
+    margin: 24px 0;
+    background: var(--bluelt);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--slate);
+    line-height: 1.7;
+    border-radius: 0 8px 8px 0;
+  }
+  .post-tags { display: flex; gap: 7px; flex-wrap: wrap; margin: 36px 0 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .post-share { display: flex; gap: 10px; align-items: center; }
+  .share-label { font-size: 10px; color: var(--slate2); letter-spacing: 1px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+  .share-btn {
+    font-size: 11px;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    color: var(--slate2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .2s;
+    background: none;
+  }
+  .share-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+  @media (max-width: 900px) {
+    .insights-hero  { padding: 60px 24px 40px; }
+    .insights-layout{ grid-template-columns: 1fr; padding: 40px 24px; }
+    .sidebar        { position: static; }
+    .featured-article { grid-template-columns: 1fr; }
+    .feat-thumb     { min-height: 200px; }
+    .article-grid   { grid-template-columns: 1fr; }
+    .post-hero      { padding: 56px 24px 36px; }
+    .post-layout    { grid-template-columns: 1fr; padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="backToList()">
+      <img src="logo.png" alt="DAQAI Logo" style="height:42px;width:auto;display:block;"/>
+      <div class="logo-text">DAQAI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#sectors">Industries</a></li>
+      <li><a href="insights.html" class="active">Insights</a></li>
+      <li><a href="index.html#partners">Partners</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-cta" onclick="openModal()">Request Consultation</div>
+  </div>
+</nav>
+
+<!-- ══ INSIGHTS LIST VIEW ══ -->
+<div id="insights-wrap" class="insights-wrap">
+
+  <div class="insights-hero">
+    <div class="insights-hero-inner">
+      <div class="eyebrow" style="color:var(--slate3);">Knowledge Hub</div>
+      <h1>Industry Insights</h1>
+      <p>Trends, analysis, and expert perspectives across Defence, Government, and Healthcare sectors — written by the DAQAI team.</p>
+      <div class="filter-bar">
+        <button class="ftab active" onclick="filterPosts('all', this)">All</button>
+        <button class="ftab" onclick="filterPosts('cybersecurity', this)">Cybersecurity</button>
+        <button class="ftab" onclick="filterPosts('defence', this)">Defence</button>
+        <button class="ftab" onclick="filterPosts('government', this)">Government</button>
+        <button class="ftab" onclick="filterPosts('healthcare', this)">Healthcare</button>
+        <button class="ftab" onclick="filterPosts('infrastructure', this)">Infrastructure</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-layout">
+    <div>
+      <!-- FEATURED -->
+      <a class="featured-article" onclick="showPost('nexavm')" data-sector="infrastructure">
+        <div class="feat-thumb">⚙️</div>
+        <div class="feat-body">
+          <span class="feat-badge">Infrastructure</span>
+          <h2>NexaVM vs VMware: Why Enterprises Are Walking Away from Broadcom</h2>
+          <p>Price increases of up to 1,050%, forced subscription bundles, and the end of perpetual licensing. Broadcom's VMware has pushed enterprises to their breaking point — and NexaVM is where they're heading.</p>
+          <div class="feat-meta"><span>01 May 2025</span><span>·</span><span>10 min read</span></div>
+          <div class="btn btn-navy btn-sm" style="margin-top:16px;width:fit-content;">Read Article →</div>
+        </div>
+      </a>
+
+      <!-- ARTICLE GRID -->
+      <div class="article-grid" id="article-grid">
+
+        <a class="article-card" onclick="showPost('ai-cybersecurity')" data-sector="cybersecurity">
+          <div class="article-thumb">🤖</div>
+          <div class="article-body">
+            <span class="article-badge">Cybersecurity</span>
+            <h3>8 Ways AI Has Changed the Cybersecurity Game — And Why You Should Be Worried</h3>
+            <p>AI was supposed to make cybersecurity easier. It has — for the attackers. Here's what has changed.</p>
+            <div class="article-meta"><span>01 May 2025</span><span>·</span><span>12 min read</span></div>
+          </div>
+        </a>
+
+        <a class="article-card" onclick="showPost('healthcare-threats')" data-sector="healthcare">
+          <div class="article-thumb">🏥</div>
+          <div class="article-body">
+            <span class="article-badge">Healthcare</span>
+            <h3>Cybersecurity Threats Facing Pakistan's Healthcare Sector in 2025</h3>
+            <p>As hospitals digitise, threat actors have followed with sophisticated, targeted campaigns.</p>
+            <div class="article-meta"><span>12 Apr 2025</span><span>·</span><span>6 min read</span></div>
+          </div>
+        </a>
+
+        <a class="article-card" onclick="showPost('zero-trust')" data-sector="defence">
+          <div class="article-thumb">🛡️</div>
+          <div class="article-body">
+            <span class="article-badge">Defence</span>
+            <h3>Zero Trust Architecture for Defence Networks: A Practical Guide</h3>
+            <p>Traditional perimeter security is obsolete. How to implement Zero Trust in classified environments.</p>
+            <div class="article-meta"><span>28 Mar 2025</span><span>·</span><span>8 min read</span></div>
+          </div>
+        </a>
+
+        <a class="article-card" onclick="showPost('digital-pakistan')" data-sector="government">
+          <div class="article-thumb">🏛️</div>
+          <div class="article-body">
+            <span class="article-badge">Government</span>
+            <h3>Digital Pakistan: IT Infrastructure Gaps That Must Be Addressed</h3>
+            <p>Legacy systems and a critical skills shortage remain the barriers between aspiration and delivery.</p>
+            <div class="article-meta"><span>14 Mar 2025</span><span>·</span><span>7 min read</span></div>
+          </div>
+        </a>
+
+        <a class="article-card" onclick="showPost('siem-soar')" data-sector="cybersecurity">
+          <div class="article-thumb">🔒</div>
+          <div class="article-body">
+            <span class="article-badge">Cybersecurity</span>
+            <h3>SIEM vs SOAR: Choosing the Right Security Platform for Your Organisation</h3>
+            <p>A decision guide for IT leaders on when you need one — or both.</p>
+            <div class="article-meta"><span>02 Mar 2025</span><span>·</span><span>5 min read</span></div>
+          </div>
+        </a>
+
+        <a class="article-card" onclick="showPost('hipaa')" data-sector="healthcare">
+          <div class="article-thumb">💊</div>
+          <div class="article-body">
+            <span class="article-badge">Healthcare</span>
+            <h3>HIPAA Compliance for Telemedicine Providers: What You Need to Know</h3>
+            <p>Compliance gaps are exposing telemedicine providers and their patients to serious risk.</p>
+            <div class="article-meta"><span>18 Feb 2025</span><span>·</span><span>6 min read</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sw sw-cta">
+        <div class="sw-title">Expert Guidance</div>
+        <h4>Talk to our team</h4>
+        <p>Get expert advice on how these trends affect your IT strategy and security posture.</p>
+        <div class="btn btn-blue btn-sm" onclick="openModal()">Request Consultation</div>
+      </div>
+
+      <div class="sw">
+        <div class="sw-title">Browse by Sector</div>
+        <ul class="sw-list">
+          <li><a onclick="filterPosts('all', null)">All Sectors <span class="sw-count">7</span></a></li>
+          <li><a onclick="filterPosts('cybersecurity', null)">Cybersecurity <span class="sw-count">2</span></a></li>
+          <li><a onclick="filterPosts('defence', null)">Defence <span class="sw-count">1</span></a></li>
+          <li><a onclick="filterPosts('government', null)">Government <span class="sw-count">1</span></a></li>
+          <li><a onclick="filterPosts('healthcare', null)">Healthcare <span class="sw-count">2</span></a></li>
+          <li><a onclick="filterPosts('infrastructure', null)">Infrastructure <span class="sw-count">1</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sw">
+        <div class="sw-title">Recent Articles</div>
+        <ul class="sw-list">
+          <li><a onclick="showPost('nexavm')">NexaVM vs VMware</a></li>
+          <li><a onclick="showPost('ai-cybersecurity')">8 Ways AI Changed Cybersecurity</a></li>
+          <li><a onclick="showPost('healthcare-threats')">Healthcare Cybersecurity 2025</a></li>
+          <li><a onclick="showPost('zero-trust')">Zero Trust for Defence</a></li>
+          <li><a onclick="showPost('digital-pakistan')">Digital Pakistan IT Gaps</a></li>
+          <li><a onclick="showPost('siem-soar')">SIEM vs SOAR</a></li>
+          <li><a onclick="showPost('hipaa')">HIPAA for Telemedicine</a></li>
+        </ul>
+      </div>
+
+      <div class="sw">
+        <div class="sw-title">Our Services</div>
+        <ul class="sw-list">
+          <li><a href="services/cybersecurity.html">Cybersecurity</a></li>
+          <li><a href="services/managed-it.html">Managed IT Services</a></li>
+          <li><a href="services/ict-consulting.html">ICT Consulting</a></li>
+          <li><a href="services/hardware-software.html">Hardware &amp; Software</a></li>
+          <li><a href="services/intelligence-solutions.html">Intelligence Solutions</a></li>
+          <li><a href="services/software-development.html">Software Development</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <img src="logo.png" alt="DAQAI" style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:.85;margin-bottom:8px;display:block;"/>
+          DAQAI
+        </div>
+        <div class="footer-tagline">Secure · Transform · Excel</div>
+        <p class="footer-desc">Enterprise IT solutions for Defence, Government and Healthcare sectors in Pakistan.</p>
+      </div>
+      <div>
+        <div class="fc-title">Services</div>
+        <ul class="fc-list">
+          <li><a href="services/cybersecurity.html">Cybersecurity</a></li>
+          <li><a href="services/managed-it.html">Managed IT Services</a></li>
+          <li><a href="services/ict-consulting.html">ICT Consulting</a></li>
+          <li><a href="services/hardware-software.html">Hardware &amp; Software</a></li>
+          <li><a href="services/intelligence-solutions.html">Intelligence Solutions</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fc-title">Company</div>
+        <ul class="fc-list">
+          <li><a href="about.html">About DAQAI</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fc-title">Contact</div>
+        <ul class="fc-list">
+          <li><a href="mailto:contact@daqai.org">contact@daqai.org</a></li>
+          <li><a href="tel:+923215487114">+92 321 5487114</a></li>
+          <li style="color:rgba(255,255,255,.4);font-size:12px;margin-top:4px;">Islamabad, Pakistan</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+      <div class="cbadges">
+        <span class="cbadge">Dell Technologies Authorized</span>
+        <span class="cbadge">Lenovo 360 Authorized</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ SINGLE POST VIEW ══ -->
+<div id="post-wrap" class="post-wrap">
+  <div class="post-hero">
+    <div class="post-hero-inner">
+      <div class="post-breadcrumb">
+        <span onclick="backToList()">Home</span>
+        <span class="sep">/</span>
+        <span onclick="backToList()">Insights</span>
+        <span class="sep">/</span>
+        <span id="post-crumb" style="color:rgba(255,255,255,.3);">Article</span>
+      </div>
+      <div id="post-badge" class="post-badge">Article</div>
+      <h1 id="post-title"></h1>
+      <p id="post-sub" class="post-sub"></p>
+      <div class="post-meta-row">
+        <span>DAQAI Editorial Team</span>
+        <span class="sep">·</span>
+        <span id="post-date"></span>
+        <span class="sep">·</span>
+        <span id="post-read"></span>
+      </div>
+    </div>
+  </div>
+  <div id="post-hero-img" class="post-hero-img">📄</div>
+  <div class="post-layout">
+    <article>
+      <div id="post-body" class="post-content"></div>
+      <div id="post-tags" class="post-tags"></div>
+      <div class="post-share">
+        <span class="share-label">Share</span>
+        <button class="share-btn" id="share-linkedin">LinkedIn</button>
+        <button class="share-btn" id="share-twitter">X / Twitter</button>
+      </div>
+    </article>
+    <aside class="sidebar">
+      <div class="sw sw-cta">
+        <div class="sw-title">Expert Guidance</div>
+        <h4>Talk to our team</h4>
+        <p>Get tailored advice on how this topic impacts your organisation.</p>
+        <div class="btn btn-blue btn-sm" onclick="openModal()">Request Consultation</div>
+      </div>
+      <div class="sw">
+        <div class="sw-title">All Insights</div>
+        <ul class="sw-list">
+          <li><a onclick="showPost('nexavm')">NexaVM vs VMware</a></li>
+          <li><a onclick="showPost('ai-cybersecurity')">8 Ways AI Changed Cybersecurity</a></li>
+          <li><a onclick="showPost('healthcare-threats')">Healthcare Cybersecurity 2025</a></li>
+          <li><a onclick="showPost('zero-trust')">Zero Trust for Defence</a></li>
+          <li><a onclick="showPost('digital-pakistan')">Digital Pakistan IT Gaps</a></li>
+          <li><a onclick="showPost('siem-soar')">SIEM vs SOAR</a></li>
+          <li><a onclick="showPost('hipaa')">HIPAA for Telemedicine</a></li>
+        </ul>
+      </div>
+      <div class="sw">
+        <div class="sw-title">Our Services</div>
+        <ul class="sw-list">
+          <li><a href="services/cybersecurity.html">Cybersecurity</a></li>
+          <li><a href="services/managed-it.html">Managed IT Services</a></li>
+          <li><a href="services/intelligence-solutions.html">Intelligence Solutions</a></li>
+          <li><a href="services/software-development.html">Software Development</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <footer>
+    <div class="footer-bottom" style="max-width:1240px;margin:0 auto;border-top:none;padding:20px 48px;">
+      <span>© 2025 DAQAI Private Limited. All rights reserved.</span>
+      <div class="cbadges"><span class="cbadge">Dell Technologies Authorized</span><span class="cbadge">Lenovo 360 Authorized</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(15,30,50,.55);backdrop-filter:blur(6px);"></div>
+<div id="modal" style="display:none;position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);background:var(--white);border-radius:14px;box-shadow:0 24px 80px rgba(15,30,50,.22);overflow:hidden;">
+  <div style="background:linear-gradient(135deg,var(--navy),var(--slate));padding:32px 36px 28px;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;">×</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">Get In Touch</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:700;margin-bottom:6px;">Request a Consultation</h3>
+    <p style="font-size:13px;color:rgba(255,255,255,.65);">Fill in your details and our team will be in touch within 24 hours.</p>
+  </div>
+  <div style="padding:32px 36px;">
+    <form id="consult-form" onsubmit="submitForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" required placeholder="Ahmed Khan" class="form-input"/></div>
+        <div><label class="form-label">Organisation *</label><input type="text" required placeholder="Your Organisation" class="form-input"/></div>
+      </div>
+      <div style="margin-bottom:16px;"><label class="form-label">Email Address *</label><input type="email" required placeholder="ahmed@organisation.pk" class="form-input"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label class="form-label">Phone Number</label><input type="tel" placeholder="+92 321 5487114" class="form-input"/></div>
+        <div>
+          <label class="form-label">Service Interest</label>
+          <select class="form-input">
+            <option value="">Select a service…</option>
+            <option>Cybersecurity</option>
+            <option>Managed IT Services</option>
+            <option>ICT Consulting</option>
+            <option>Hardware &amp; Software</option>
+            <option>Intelligence Solutions</option>
+            <option>Software Development</option>
+            <option>Resource Outsourcing</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;"><label class="form-label">Message</label><textarea rows="3" placeholder="Tell us about your requirements…" class="form-input" style="resize:vertical;"></textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="font-size:11px;color:var(--slate2);">We'll respond within <strong>24 hours</strong>.</p>
+        <button type="submit" class="btn btn-navy">Send Request →</button>
+      </div>
+      <p id="form-error" style="color:#c0392b;font-size:12px;margin-top:10px;text-align:center;display:none;"></p>
+    </form>
+    <div id="form-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px;">Thank you, <span id="success-name">there</span>!</h3>
+      <p style="font-size:14px;color:var(--slate2);margin-bottom:20px;">Your request has been sent. We'll be in touch within <strong>24 hours</strong>.</p>
+      <div style="margin-bottom:10px;font-size:13px;">📧 <a href="mailto:contact@daqai.org" style="color:var(--blue);">contact@daqai.org</a></div>
+      <div style="margin-bottom:24px;font-size:13px;">📞 <a href="tel:+923215487114" style="color:var(--blue);">+92 321 5487114</a></div>
+      <button onclick="closeModal()" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+/* ── POST DATA ── */
+const posts = {
+  'nexavm': {
+    badge: 'Infrastructure', icon: '⚙️', date: '01 May 2025', read: '10 min read',
+    title: 'NexaVM vs VMware: Why Enterprises Are Walking Away from Broadcom',
+    sub: "Price increases of up to 1,050%, forced subscription bundles, and the end of perpetual licensing — Broadcom's VMware has pushed enterprises to their breaking point.",
+    tags: ['Infrastructure','Virtualisation','VMware','NexaVM','Enterprise IT'],
+    body: `<p style="font-size:17px;color:var(--slate2);line-height:1.9;margin-bottom:24px;font-style:italic;">Broadcom's $61 billion acquisition of VMware sent shockwaves through the enterprise IT world. What followed — sweeping price increases, forced subscription bundles, and the elimination of perpetual licensing — has triggered one of the largest migrations in virtualisation history.</p>
+<h2>What Happened to VMware?</h2>
+<p>For two decades, VMware was the undisputed leader in enterprise virtualisation. Then Broadcom arrived. Within weeks of the acquisition closing, Broadcom eliminated perpetual licensing entirely, forcing all customers onto subscription models. It consolidated hundreds of products into expensive bundles and changed the licensing metric from per-CPU to per-core — effectively doubling licence counts overnight.</p>
+<p>The financial impact was immediate and severe. Analysts at Forrester reported price increases of <strong>400% to 700%</strong> for typical customers. AT&T publicly stated its VMware spend would increase by over <strong>1,050%</strong>. Gartner reported that VMware alternative inquiries spiked <strong>275% year-over-year</strong> in the first half of 2024 alone.</p>
+<blockquote>"They've made wildly insane price increases — either you pay what we want or you're out of here." — Enterprise IT Director, CIO Dive</blockquote>
+<h2>Introducing NexaVM</h2>
+<p>NexaVM is a Swiss-engineered enterprise virtualisation platform with over 20 years of development. Built on an open, hardware-independent architecture, it delivers the full spectrum of data centre virtualisation — compute, network, storage, and security — without vendor lock-in or pricing unpredictability.</p>
+<p>Trusted by global cloud providers including Alibaba Cloud, which chose NexaVM as the backbone of its virtualisation infrastructure supporting over 200 million users, NexaVM has earned its credentials at enterprise scale.</p>
+<h2>Key Differences</h2>
+<ul>
+<li><strong>Licensing:</strong> Flexible subscription or perpetual — no forced bundles</li>
+<li><strong>Pricing:</strong> Linear, predictable — no surprise hikes at renewal</li>
+<li><strong>Hardware:</strong> Fully hardware-independent — reuse existing infrastructure</li>
+<li><strong>Management:</strong> Single unified console included — no separate licence required</li>
+<li><strong>Storage:</strong> nSAN distributed storage included — replaces vSAN</li>
+<li><strong>Network:</strong> Built-in distributed switching — replaces NSX basics</li>
+</ul>
+<h2>The Bottom Line</h2>
+<p>VMware under Broadcom is a different product to the one most organisations licensed. The question for organisations beginning their exit planning is no longer <em>whether</em> to migrate — it's <em>when</em> and <em>with whom</em>. DAQAI is Pakistan's authorised NexaVM enterprise reseller and manages the full migration lifecycle.</p>`
+  },
+  'ai-cybersecurity': {
+    badge: 'Cybersecurity', icon: '🤖', date: '01 May 2025', read: '12 min read',
+    title: '8 Ways AI Has Changed the Cybersecurity Game — And Why You Should Be Worried',
+    sub: 'AI was supposed to make cybersecurity easier. It has — for the attackers. Here is what has changed, and what to do about it.',
+    tags: ['Cybersecurity','AI','Threat Intelligence','Enterprise Security'],
+    body: `<p style="font-size:17px;color:var(--slate2);line-height:1.9;margin-bottom:24px;font-style:italic;">Artificial intelligence was supposed to make cybersecurity easier. And it has — for the attackers. The same technology powering your spam filter is now writing malware, impersonating your CEO, and breaking into networks faster than any human team can respond.</p>
+<h2>1. AI Writes Better Phishing Emails Than Humans Do</h2>
+<p>Modern AI language models generate perfectly written, contextually aware phishing emails in seconds — tailored to the target, referencing their real name, company, role, and recent events. Attackers can now generate thousands of personalised phishing emails simultaneously. Your employees' ability to spot a dodgy email is being tested against an adversary that never gets tired and never makes spelling mistakes.</p>
+<h2>2. Deepfakes Are Making Impersonation Terrifyingly Convincing</h2>
+<p>In 2024, a finance employee transferred $25 million after attending a video call where every person on screen — including the CFO — was an AI-generated deepfake. AI voice cloning can replicate a specific person's voice with as little as three seconds of audio. Traditional verification — hearing a familiar voice, seeing a familiar face — is no longer reliable.</p>
+<h2>3. AI Is Automating Vulnerability Discovery at Machine Speed</h2>
+<p>AI-assisted scanning tools analyse codebases and network configurations far faster than any human penetration tester. Threat actors use these same tools to identify unpatched systems across the public internet in automated, continuous loops. Your patch management window is shrinking to hours.</p>
+<h2>4. Malware Now Rewrites Itself to Evade Detection</h2>
+<p>AI-generated polymorphic malware continuously rewrites its own code — changing its signature every time it executes. No static signature can catch it.</p>
+<blockquote>"Legacy signature-based antivirus is not a defence against AI-generated polymorphic malware. It is theatre."</blockquote>
+<h2>5. AI Is Closing the Attacker Skills Gap Overnight</h2>
+<p>A threat actor with limited technical skills can now use AI tools to write functional exploit code, generate custom malware, and execute sophisticated attacks. The barrier to entry for serious cybercrime has never been lower. The global cost of cybercrime is projected to reach $10.5 trillion annually by 2025.</p>
+<h2>6. Attacks Move at Machine Speed</h2>
+<p>The fastest recorded attacker breakout time — from initial breach to full network compromise — was just 7 minutes. That is not enough time for a human security team to receive an alert, assess it, and respond. The only credible response is automated AI-driven defence.</p>
+<h2>7. Critical Infrastructure Is Being Targeted with Surgical Precision</h2>
+<p>AI tools can analyse SCADA systems to identify vulnerabilities specific to a facility's configuration and maintain persistent, low-and-slow access for months before activating. For Defence, Government, and Healthcare organisations, this represents an existential-level threat.</p>
+<h2>8. The Good News: AI Is Also Your Most Powerful Defence</h2>
+<p>AI-powered SIEM platforms correlate millions of events per second and detect anomalous behaviour before an attack propagates. The organisations that will weather this era are those that meet AI offence with AI defence. Not eventually — now.</p>`
+  },
+  'healthcare-threats': {
+    badge: 'Healthcare', icon: '🏥', date: '12 Apr 2025', read: '6 min read',
+    title: "Cybersecurity Threats Facing Pakistan's Healthcare Sector in 2025",
+    sub: "As hospitals digitise patient records and deploy telemedicine platforms, threat actors have followed with sophisticated, targeted attacks.",
+    tags: ['Healthcare','Cybersecurity','Pakistan','Ransomware','HIPAA'],
+    body: `<p>Pakistan's healthcare sector is undergoing rapid digital transformation. Electronic Health Records, telemedicine platforms, and connected medical devices are now standard in major hospitals. But with digitisation comes exposure.</p>
+<h2>The Threat Landscape</h2>
+<p>Ransomware remains the dominant threat, with healthcare institutions increasingly targeted due to the critical nature of their data and the pressure to restore operations quickly. In 2024, multiple regional hospitals reported incidents involving encrypted patient databases and cryptocurrency ransom demands.</p>
+<blockquote>"Healthcare data is 10× more valuable on the dark web than financial data. Attackers know hospitals will pay to restore access."</blockquote>
+<h2>Key Vulnerabilities</h2>
+<ul>
+<li><strong>Unpatched legacy systems</strong> — many hospitals run end-of-life operating systems</li>
+<li><strong>Weak access controls</strong> — shared credentials and lack of MFA remain common</li>
+<li><strong>Inadequate network segmentation</strong> — clinical and administrative networks often share infrastructure</li>
+<li><strong>Limited security monitoring</strong> — few hospitals have a dedicated SOC</li>
+<li><strong>Insufficient staff training</strong> — phishing awareness remains critically low</li>
+</ul>
+<h2>What Healthcare CIOs Must Prioritise</h2>
+<p>The path to resilience begins with risk visibility. Conduct a comprehensive vulnerability assessment to understand your actual attack surface. Core priorities are network segmentation, EDR tooling, 24/7 managed SOC monitoring, and regular staff phishing simulations.</p>
+<p>DAQAI works with healthcare organisations across Pakistan to assess risk, deploy security infrastructure, and build the internal capabilities needed to operate securely.</p>`
+  },
+  'zero-trust': {
+    badge: 'Defence', icon: '🛡️', date: '28 Mar 2025', read: '8 min read',
+    title: 'Zero Trust Architecture for Defence Networks: A Practical Guide',
+    sub: 'Traditional perimeter-based security is no longer sufficient for classified and mission-critical defence environments.',
+    tags: ['Defence','Zero Trust','Network Security','Classified','NIST'],
+    body: `<p>The traditional castle-and-moat security model has failed the defence sector. Advanced persistent threats, insider risks, and the proliferation of connected devices have rendered perimeter thinking obsolete.</p>
+<h2>What Is Zero Trust?</h2>
+<p>Zero Trust is built on a simple principle: <strong>never trust, always verify</strong>. No user, device, or system is inherently trusted — even those already inside the network. Every access request must be authenticated, authorised, and continuously validated.</p>
+<blockquote>"In a Zero Trust model, identity is the new perimeter."</blockquote>
+<h2>Core Pillars for Defence Environments</h2>
+<ul>
+<li><strong>Identity &amp; Access Management (IAM)</strong> — strong MFA with hardware tokens for all privileged access</li>
+<li><strong>Micro-segmentation</strong> — granular network zones to limit lateral movement</li>
+<li><strong>Device health verification</strong> — continuous assessment of endpoint security posture</li>
+<li><strong>Least-privilege access</strong> — minimum access required for function, nothing more</li>
+<li><strong>Continuous monitoring</strong> — real-time threat detection through SIEM/SOAR</li>
+</ul>
+<h2>Implementation Approach</h2>
+<p>Zero Trust is a journey, not a product. DAQAI recommends a phased approach: beginning with identity and access management, then network segmentation, then continuous monitoring and automated response.</p>
+<p>DAQAI has delivered Zero Trust assessments and implementations for defence-sector clients, leveraging NexaVM for infrastructure control and SGBox SIEM &amp; SOAR for security monitoring.</p>`
+  },
+  'digital-pakistan': {
+    badge: 'Government', icon: '🏛️', date: '14 Mar 2025', read: '7 min read',
+    title: 'Digital Pakistan: IT Infrastructure Gaps That Must Be Addressed',
+    sub: 'The Digital Pakistan initiative is ambitious — but legacy systems and a critical skills shortage remain the barriers between aspiration and delivery.',
+    tags: ['Government','Digital Pakistan','Public Sector','IT Modernisation'],
+    body: `<p>The Digital Pakistan initiative represents one of the most ambitious public sector transformation programmes in the country's history. But ground reality tells a different story from the brochure.</p>
+<h2>The Legacy System Problem</h2>
+<p>Surveys of federal and provincial government IT departments consistently reveal the same findings: 60–75% of core systems run on end-of-life infrastructure. Legacy systems are not just technically obsolete — they are security liabilities with unpatched vulnerabilities that cannot be fixed without replacing the underlying platform.</p>
+<blockquote>"You cannot build a digital future on analogue foundations. Infrastructure modernisation is the prerequisite, not the afterthought."</blockquote>
+<h2>The Skills Gap</h2>
+<p>Pakistan produces strong engineering graduates, but the public sector struggles to attract and retain them. Salary gaps between government IT roles and private sector equivalents are significant, leaving government IT departments chronically understaffed.</p>
+<h2>What Must Change</h2>
+<ul>
+<li><strong>Structured migration roadmaps</strong> — phased legacy modernisation with continuity plans</li>
+<li><strong>Centralised shared services</strong> — reducing duplication across departments</li>
+<li><strong>Public-private partnerships</strong> — leveraging private sector expertise to fill skills gaps</li>
+<li><strong>Security-by-design mandates</strong> — cybersecurity as a mandatory component of every digital project</li>
+</ul>
+<p>DAQAI works with government clients to develop realistic, phased modernisation roadmaps that improve security posture and operational efficiency while managing the complexity of transition.</p>`
+  },
+  'siem-soar': {
+    badge: 'Cybersecurity', icon: '🔒', date: '02 Mar 2025', read: '5 min read',
+    title: 'SIEM vs SOAR: Choosing the Right Security Platform for Your Organisation',
+    sub: 'Understanding what each technology does — and knowing when you need both — is essential for any IT security decision-maker.',
+    tags: ['Cybersecurity','SIEM','SOAR','SOC','Security Operations'],
+    body: `<p>In the crowded world of enterprise security technology, few acronyms cause more confusion than SIEM and SOAR. They are often discussed together, sometimes conflated, and frequently misunderstood.</p>
+<h2>What Is a SIEM?</h2>
+<p>Security Information and Event Management (SIEM) platforms collect, aggregate, and analyse log data from across your IT environment to detect anomalies and generate security alerts. SIEM is fundamentally about <strong>visibility and detection</strong>. It answers: <em>what is happening on my network right now?</em></p>
+<h2>What Is SOAR?</h2>
+<p>Security Orchestration, Automation, and Response (SOAR) platforms automate repetitive response tasks, orchestrate workflows across multiple tools, and help analysts manage their incident queue. SOAR is fundamentally about <strong>response and efficiency</strong>.</p>
+<blockquote>"SIEM tells you what happened. SOAR helps you respond faster and more consistently."</blockquote>
+<h2>When Do You Need Both?</h2>
+<p>Most mature security operations programmes benefit from both. SIEM provides detection capability; SOAR provides response automation. Together, they form the backbone of an effective Security Operations Centre — whether in-house, managed, or hybrid.</p>
+<h2>The SGBox Approach</h2>
+<p>DAQAI's preferred platform — SGBox Advanced Bundle — integrates SIEM and SOAR alongside User Behaviour Analytics, Threat Intelligence, Active Directory Auditing, and Incident Management in a single unified stack. DAQAI is Pakistan's authorised SGBox partner.</p>`
+  },
+  'hipaa': {
+    badge: 'Healthcare', icon: '💊', date: '18 Feb 2025', read: '6 min read',
+    title: "HIPAA Compliance for Telemedicine Providers: What You Need to Know",
+    sub: "As remote healthcare expands rapidly across Pakistan, compliance gaps are exposing providers — and their patients — to serious risk.",
+    tags: ['Healthcare','HIPAA','Telemedicine','Compliance','Data Protection'],
+    body: `<p>Telemedicine adoption in Pakistan accelerated dramatically post-pandemic. Virtual consultations, remote patient monitoring, and digital prescriptions are now mainstream. But the regulatory and security frameworks to govern them are lagging far behind.</p>
+<h2>Why HIPAA Matters Beyond the US</h2>
+<p>Any Pakistani healthcare provider handling data of international patients, partnering with US-based organisations, or seeking international accreditation must demonstrate HIPAA alignment. More importantly, HIPAA frameworks represent global best practice for patient data protection regardless of jurisdiction.</p>
+<h2>Core Compliance Requirements</h2>
+<ul>
+<li><strong>Data encryption</strong> — all Protected Health Information (PHI) must be encrypted in transit and at rest</li>
+<li><strong>Access controls</strong> — role-based access with full audit trails for every record accessed</li>
+<li><strong>Business Associate Agreements</strong> — third-party vendors bound contractually to the same standards</li>
+<li><strong>Breach notification</strong> — defined procedures for detecting, containing, and reporting incidents</li>
+<li><strong>Risk assessments</strong> — regular, documented assessments of security risks to PHI</li>
+</ul>
+<h2>Common Gaps in Telemedicine Implementations</h2>
+<p>The most common compliance failures DAQAI encounters: unencrypted video consultation platforms, inadequate authentication for patient portal access, and third-party integrations without proper data processing agreements.</p>
+<p>DAQAI's healthcare cybersecurity practice helps providers implement the technical safeguards required for HIPAA alignment and build the operational procedures to maintain compliance over time.</p>`
+  }
+};
+
+/* ── FILTER ── */
+function filterPosts(sector, btn) {
+  if (btn) {
+    document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const cards = document.querySelectorAll('#article-grid .article-card, .featured-article');
+  cards.forEach((card, i) => {
+    const cardSector = card.getAttribute('data-sector') || '';
+    const show = sector === 'all' || cardSector === sector;
+    card.style.display = show ? '' : 'none';
+    if (show) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(10px)';
+      card.style.transition = `opacity .3s ease ${i * 0.05}s, transform .3s ease ${i * 0.05}s`;
+      setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 20);
+    }
+  });
+}
+
+/* ── SHOW POST ── */
+function showPost(slug) {
+  const p = posts[slug];
+  if (!p) return;
+  document.getElementById('insights-wrap').classList.add('hidden');
+  const wrap = document.getElementById('post-wrap');
+  wrap.classList.add('active');
+  document.getElementById('post-badge').textContent = p.badge;
+  document.getElementById('post-title').textContent = p.title;
+  document.getElementById('post-sub').textContent   = p.sub;
+  document.getElementById('post-date').textContent  = p.date;
+  document.getElementById('post-read').textContent  = p.read;
+  document.getElementById('post-hero-img').textContent = p.icon;
+  document.getElementById('post-body').innerHTML    = p.body;
+  document.getElementById('post-crumb').textContent = p.title.substring(0, 38) + '…';
+  const tagsEl = document.getElementById('post-tags');
+  tagsEl.innerHTML = p.tags.map(t => `<span class="stag">${t}</span>`).join('');
+  document.getElementById('share-linkedin').onclick = () => window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href));
+  document.getElementById('share-twitter').onclick  = () => window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(p.title) + '&url=' + encodeURIComponent(window.location.href));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── BACK TO LIST ── */
+function backToList() {
+  document.getElementById('post-wrap').classList.remove('active');
+  document.getElementById('insights-wrap').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
