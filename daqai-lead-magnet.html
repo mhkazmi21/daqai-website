@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Choose a Cybersecurity Provider — Free Guide | DAQAI</title>
+  <meta name="description" content="Download DAQAI's free ICT Procurement Guide — an 8-step vendor evaluation framework for CIOs, CISOs and procurement officers in Pakistan.">
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A0F1E;
+      --navy2:   #0D1526;
+      --card:    #111827;
+      --teal:    #00C2CB;
+      --teal-bg: rgba(0,194,203,0.10);
+      --teal-bd: rgba(0,194,203,0.22);
+      --text:    #E8EDF5;
+      --muted:   #8A9BC2;
+      --dim:     #6B7A99;
+      --faint:   #4D5E7A;
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,15,30,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: .5rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .88; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4.5rem 2.5rem 3.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-bd);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.07;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.25rem;
+    }
+    h1 em { color: var(--teal); font-style: normal; }
+
+    .subhead {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    /* Learn list */
+    .learn-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--faint);
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+
+    .learn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: .55rem 0;
+      border-top: 1px solid rgba(255,255,255,.05);
+      font-size: 14px;
+      color: #C0CBDF;
+      line-height: 1.5;
+    }
+    .learn-item svg {
+      width: 16px; height: 16px;
+      stroke: var(--teal);
+      fill: none;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Stats row */
+    .stats {
+      display: flex;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .stat { flex: 1; padding-left: 1.25rem; border-left: 1px solid rgba(255,255,255,.07); }
+    .stat:first-child { padding-left: 0; border-left: none; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .stat-label { font-size: 11px; color: var(--dim); margin-top: 3px; line-height: 1.4; }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 2rem;
+      position: sticky;
+      top: 80px;
+    }
+
+    .radar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .radar-svg { width: 130px; height: 130px; }
+
+    .sweep { transform-origin: 65px 65px; animation: sweep 6s linear infinite; }
+    @keyframes sweep { to { transform: rotate(360deg); } }
+
+    .pulse { transform-origin: 65px 65px; animation: pulse 3s ease-in-out infinite; }
+    .pulse:nth-child(2) { animation-delay: 1s; }
+    .pulse:nth-child(3) { animation-delay: 2s; }
+    @keyframes pulse { 0%,100%{opacity:.1;} 50%{opacity:.38;} }
+
+    .form-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-bd);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .form-card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .3rem;
+      letter-spacing: -.3px;
+    }
+    .form-sub { font-size: 13px; color: var(--dim); margin-bottom: 1.5rem; }
+
+    .field { margin-bottom: .875rem; }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dim);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      background: var(--navy2);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      padding: .625rem .875rem;
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input::placeholder { color: #3D4F6E; }
+    input:focus, select:focus { border-color: var(--teal); }
+    select option { background: var(--card); }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--teal);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      padding: .9rem;
+      cursor: pointer;
+      margin-top: .5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: opacity .2s;
+    }
+    .submit-btn:hover { opacity: .88; }
+    .submit-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+    .form-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: .875rem;
+      font-size: 11px;
+      color: var(--faint);
+    }
+
+    /* Error */
+    .form-error {
+      display: none;
+      background: rgba(220,53,69,.12);
+      border: 1px solid rgba(220,53,69,.3);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-size: 13px;
+      color: #f87171;
+      margin-top: .75rem;
+    }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+    .success-icon {
+      width: 52px; height: 52px;
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-bd);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .success-icon svg { width: 24px; height: 24px; stroke: var(--teal); fill: none; }
+    .success-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .success-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .success-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1.25rem;
+      background: var(--teal);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: .7rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .success-link:hover { opacity: .88; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--border); margin: 0 2.5rem; }
+
+    /* ── INSIDE SECTION ── */
+    .section { padding: 3.5rem 2.5rem; background: var(--navy2); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--faint);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .inside-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .inside-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .inside-icon {
+      width: 36px; height: 36px;
+      background: var(--teal-bg);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .inside-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; }
+    .inside-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .inside-desc { font-size: 13px; color: var(--dim); line-height: 1.6; }
+
+    /* ── AUDIENCE ── */
+    .audience { padding: 3rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .audience-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .audience-chip svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; flex-shrink: 0; }
+    .audience-chip span { font-size: 13px; color: #C0CBDF; font-weight: 500; line-height: 1.3; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-left { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--teal); }
+    .footer-tag { font-size: 12px; color: var(--faint); }
+    .footer-badges { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .badge {
+      font-size: 11px;
+      color: var(--dim);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.5rem; }
+      h1 { font-size: 32px; }
+      .form-card { position: static; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .inside-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 2.5rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      footer { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="https://www.daqai.org">DAQ<span>AI</span></a>
+    <ul class="nav-links">
+      <li><a href="https://www.daqai.org/#services">Services</a></li>
+      <li><a href="https://www.daqai.org/#sectors">Industries</a></li>
+      <li><a href="https://www.daqai.org/insights.html">Insights</a></li>
+      <li><a href="https://www.daqai.org/#partners">Partners</a></li>
+    </ul>
+    <a class="nav-cta" href="https://www.daqai.org/#contact">Request Consultation</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <!-- Left col -->
+    <div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span> Free Guide &nbsp;·&nbsp; ICT Procurement &nbsp;·&nbsp; 2026 Edition</div>
+
+      <h1>How to Choose a <em>Cybersecurity Provider</em></h1>
+
+      <p class="subhead">A 17-page framework for CIOs, CISOs, and procurement officers navigating Pakistan's cybersecurity market — without getting sold the wrong thing.</p>
+
+      <p class="learn-label">What you will learn</p>
+
+      <div class="learn-item">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        An 8-step vendor evaluation framework built for Pakistan's market
+      </div>
+      <div class="learn-item">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Ten red flags that should disqualify a vendor immediately
+      </div>
+      <div class="learn-item">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        A ready-to-use vendor scoring matrix and weighted RFP checklist
+      </div>
+      <div class="learn-item">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Pakistan-specific risks — PECA 2025, supply chain integrity, data sovereignty
+      </div>
+      <div class="learn-item">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Verbatim questions every procurement decision-maker must ask vendors
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">3,000+</div>
+          <div class="stat-label">Cybersecurity vendors competing globally</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$10.2M</div>
+          <div class="stat-label">Average cost of a breach in 2025</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">35.5%</div>
+          <div class="stat-label">Of breaches caused by third parties</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right col — form card -->
+    <div>
+      <div class="form-card">
+
+        <!-- Radar animation -->
+        <div class="radar-wrap">
+          <svg class="radar-svg" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="65" cy="65" r="63" stroke="rgba(0,194,203,0.08)" stroke-width="1"/>
+            <circle cx="65" cy="65" r="47" stroke="rgba(0,194,203,0.10)" stroke-width="1"/>
+            <circle cx="65" cy="65" r="31" stroke="rgba(0,194,203,0.14)" stroke-width="1"/>
+            <circle cx="65" cy="65" r="15" stroke="rgba(0,194,203,0.20)" stroke-width="1"/>
+            <line x1="65" y1="2" x2="65" y2="128" stroke="rgba(0,194,203,0.06)" stroke-width="1"/>
+            <line x1="2" y1="65" x2="128" y2="65" stroke="rgba(0,194,203,0.06)" stroke-width="1"/>
+            <circle class="pulse" cx="65" cy="65" r="52" stroke="#00C2CB" stroke-width="1"/>
+            <circle class="pulse" cx="65" cy="65" r="37" stroke="#00C2CB" stroke-width="1"/>
+            <circle class="pulse" cx="65" cy="65" r="22" stroke="#00C2CB" stroke-width="1"/>
+            <g class="sweep">
+              <path d="M65 65 L65 3 A62 62 0 0 1 119 38 Z" fill="rgba(0,194,203,0.12)"/>
+            </g>
+            <circle cx="65" cy="65" r="4" fill="#00C2CB" opacity="0.9"/>
+            <circle cx="65" cy="3"  r="2.5" fill="#00C2CB" opacity="0.7"/>
+            <circle cx="100" cy="28" r="2" fill="#00C2CB" opacity="0.5"/>
+            <circle cx="42" cy="90" r="1.5" fill="#00C2CB" opacity="0.4"/>
+            <circle cx="85" cy="78" r="2" fill="#00C2CB" opacity="0.6"/>
+          </svg>
+        </div>
+
+        <div class="form-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" stroke="#00C2CB" stroke-width="2.5" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Free Download
+        </div>
+
+        <h2>Get the Procurement Guide</h2>
+        <p class="form-sub">Instant access. Used by IT and procurement teams across Pakistan.</p>
+
+        <!-- Form -->
+        <form id="lead-form" novalidate>
+          <div class="field">
+            <label for="lf-name">Full name</label>
+            <input id="lf-name" type="text" placeholder="e.g. Ahmed Khan" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="lf-org">Organisation</label>
+            <input id="lf-org" type="text" placeholder="e.g. Ministry of IT, PEMRA, PIMS" required autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="lf-email">Work email</label>
+            <input id="lf-email" type="email" placeholder="you@organisation.gov.pk" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="lf-role">Your role</label>
+            <select id="lf-role" required>
+              <option value="">Select your role…</option>
+              <option>CIO / IT Director</option>
+              <option>CISO / Security Manager</option>
+              <option>Head of Procurement</option>
+              <option>Government IT Officer</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-btn" id="lf-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Send Me the Guide
+          </button>
+
+          <div class="form-error" id="lf-error"></div>
+
+          <p class="form-trust">
+            <svg width="12" height="12" viewBox="0 0 24 24" stroke="#4D5E7A" stroke-width="2" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            No spam &nbsp;·&nbsp; Your data stays in Pakistan &nbsp;·&nbsp; Unsubscribe anytime
+          </p>
+        </form>
+
+        <!-- Success state -->
+        <div class="form-success" id="lf-success">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <p class="success-title">You're all set, <span id="lf-success-name">there</span>!</p>
+          <p class="success-body">The guide is on its way to your inbox. Check your spam folder if it doesn't arrive within a minute.</p>
+          <a class="success-link" href="http://daqai.org/services/Daqai_Lead_MAgnet_CyberProvider.pdf" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download now instead
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /hero -->
+
+  <div class="divider"></div>
+
+  <!-- INSIDE THE GUIDE -->
+  <div class="section">
+    <div class="section-inner">
+      <p class="section-label">Inside the guide</p>
+      <div class="inside-grid">
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p class="inside-title">8-Step Evaluation Framework</p>
+          <p class="inside-desc">A structured process covering technical credentials, local presence, supply chain integrity, provider security posture, and contractual clarity.</p>
+        </div>
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <p class="inside-title">10 Vendor Red Flags</p>
+          <p class="inside-desc">Observable signals during procurement — generic proposals, no local references, evasion on data residency — that predict poor performance post-contract.</p>
+        </div>
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          </div>
+          <p class="inside-title">Scoring Matrix & RFP Checklist</p>
+          <p class="inside-desc">A weighted scoring template across 8 criteria plus a 12-point RFP checklist with verbatim questions to ask vendors in writing and in presentations.</p>
+        </div>
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+          </div>
+          <p class="inside-title">Pakistan-Specific Context</p>
+          <p class="inside-desc">PECA 2025 amendments, PTA and SBP requirements, supply chain risks from grey-market hardware, and Pakistan's 14th-place ranking in APAC for cyber vulnerabilities.</p>
+        </div>
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <p class="inside-title">Provider Type Explainer</p>
+          <p class="inside-desc">Clear breakdown of MSSPs, VARs, product vendors, and advisory firms — and exactly which questions to ask each type before signing anything.</p>
+        </div>
+
+        <div class="inside-card">
+          <div class="inside-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <p class="inside-title">Contract Clauses That Matter</p>
+          <p class="inside-desc">Data residency, incident notification SLAs, financial penalties for non-performance, and exit provisions — the non-negotiables that protect your organisation.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WRITTEN FOR -->
+  <div class="audience">
+    <p class="section-label">Written for</p>
+    <div class="audience-grid">
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>CIOs & IT Directors</span>
+      </div>
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>CISOs & Security Managers</span>
+      </div>
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span>Heads of Procurement</span>
+      </div>
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        <span>Government IT Officers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <a class="footer-logo" href="https://www.daqai.org">DAQ<span>AI</span></a>
+      <span class="footer-tag">Systems you can trust &nbsp;·&nbsp; Islamabad, Pakistan &nbsp;·&nbsp; contact@daqai.org</span>
+    </div>
+    <div class="footer-badges">
+      <span class="badge">Dell Technologies Authorized</span>
+      <span class="badge">Lenovo 360 Partner</span>
+      <span class="badge">ISO 27001 Aligned</span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       EMAILJS — copy your keys from shared.js
+  ════════════════════════════════════════════ -->
+  <script>
+    /* ── CONFIG ── paste from shared.js ── */
+    const EJS_PUBLIC_KEY   = 'a2jlimaKu329hn9DA';
+    const EJS_SERVICE_ID   = 'service_9ku198j';
+    /* Create a NEW template for lead magnet delivery — see setup note below */
+    const EJS_TEMPLATE_ID  = 'template_7gs35a3';
+
+    /* PDF public URL — update if hosted elsewhere */
+    const PDF_URL = 'http://daqai.org/services/Daqai_Lead_MAgnet_CyberProvider.pdf';
+
+    /* ── INIT ── */
+    emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+    /* ── FORM SUBMISSION ── */
+    document.getElementById('lead-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name  = document.getElementById('lf-name').value.trim();
+      const org   = document.getElementById('lf-org').value.trim();
+      const email = document.getElementById('lf-email').value.trim();
+      const role  = document.getElementById('lf-role').value;
+      const btn   = document.getElementById('lf-btn');
+      const err   = document.getElementById('lf-error');
+
+      /* Basic validation */
+      err.style.display = 'none';
+      if (!name || !org || !email || !role) {
+        err.textContent   = 'Please fill in all fields before downloading.';
+        err.style.display = 'block';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        err.textContent   = 'Please enter a valid email address.';
+        err.style.display = 'block';
+        return;
+      }
+
+      /* Loading state */
+      const originalHTML = btn.innerHTML;
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+
+      const templateParams = {
+        to_name:      name.split(' ')[0],
+        from_name:    name,
+        organisation: org,
+        email:        email,
+        role:         role,
+        pdf_url:      PDF_URL,
+        sent_at:      new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
+      };
+
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, templateParams)
+        .then(() => {
+          showSuccess(name);
+        })
+        .catch((err2) => {
+          console.error('EmailJS error:', err2);
+          /* Fallback: direct download even if email fails */
+          showSuccess(name);
+          window.open(PDF_URL, '_blank', 'noopener,noreferrer');
+        });
+    });
+
+    function showSuccess(name) {
+      document.getElementById('lead-form').style.display    = 'none';
+      document.getElementById('lf-success').style.display   = 'block';
+      document.getElementById('lf-success-name').textContent = name.split(' ')[0] || 'there';
+    }
+  </script>
+
+</body>
+</html>
